@@ -350,6 +350,357 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Vue-Dynamic-Components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/19/Vue-Dynamic-Components/" class="post-title-link" itemprop="url">Vue 动态组件 & 异步组件原理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-19 14:21:29 / 修改时间：14:22:10" itemprop="dateCreated datePublished" datetime="2019-07-19T14:21:29+08:00">2019-07-19</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>动态组件 &amp; 异步组件的存在，使得我们更方便地控制首屏代码的体积，加快加载速度。</p>
+</blockquote>
+<p>抛开具体细节不谈，一个普通 Vue 组件从创建到展现在页面里，主要经历了以下流程：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件 Object</span></span><br><span class="line">&#123;</span><br><span class="line">    template: <span class="string">'&lt;div&gt;I am async!&lt;/div&gt;'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 经过 compileToFunctions 得到对应的 render function </span></span><br><span class="line"><span class="keyword">with</span>(<span class="keyword">this</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> _c(<span class="string">'div'</span>, [_v(<span class="string">"I am async!"</span>)])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在经过 render 得到 Vnode 再 update 成为真实DOM</span></span><br></pre></td></tr></table></figure>
+
+<p>动态组件&amp;异步组件与之有什么区别呢？</p>
+<p>主要区别在于 <code>render</code> 中 <code>createComponent</code> 这一步，举例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件</span></span><br><span class="line">Vue.component(<span class="string">'example'</span>, &#123;</span><br><span class="line">    template: <span class="string">'&lt;div&gt;I am async!&lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>普通组件在 <code>createComponent</code> 时，会依据开发者自定义的 <code>options</code>，利用 <code>Vue.extend</code> 生成对应的构造函数，从而得到对应的 <code>Vnode</code> 。而一个异步组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步组件</span></span><br><span class="line">Vue.component(<span class="string">'async-example'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 利用 setTimeout 模拟请求</span></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 向 `resolve` 回调传递组件定义</span></span><br><span class="line">        resolve(&#123;</span><br><span class="line">            template: <span class="string">'&lt;div&gt;I am async!&lt;/div&gt;'</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>则是要经过一系列处理，具体过程如下</p>
+<blockquote>
+<p>在源码的 <a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/create-component.js" target="_blank" rel="noopener">create-component</a>。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// async component</span></span><br><span class="line"><span class="keyword">let</span> asyncFactory</span><br><span class="line"><span class="keyword">if</span> (isUndef(Ctor.cid)) &#123;</span><br><span class="line">    asyncFactory = Ctor</span><br><span class="line">    Ctor = resolveAsyncComponent(asyncFactory, baseCtor, context)</span><br><span class="line">    <span class="keyword">if</span> (Ctor === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        <span class="comment">// return a placeholder node for async component, which is rendered</span></span><br><span class="line">        <span class="comment">// as a comment node but preserves all the raw information for the node.</span></span><br><span class="line">        <span class="comment">// the information will be used for async server-rendering and hydration.</span></span><br><span class="line">        <span class="keyword">return</span> createAsyncPlaceholder(</span><br><span class="line">            asyncFactory,</span><br><span class="line">            data,</span><br><span class="line">            context,</span><br><span class="line">            children,</span><br><span class="line">            tag</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先 <code>Ctor</code> 就与之前不同，这里为一个 <code>function</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 利用 setTimeout 模拟请求</span></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 向 `resolve` 回调传递组件定义</span></span><br><span class="line">        resolve(&#123;</span><br><span class="line">            template: <span class="string">'&lt;div&gt;I am async!&lt;/div&gt;'</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后调用 <code>resolveAsyncComponent(asyncFactory, baseCtor, context)</code></p>
+<blockquote>
+<p><strong>resolveAsyncComponent</strong> 在源码的 <a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/helpers/resolve-async-component.js" target="_blank" rel="noopener">resolveAsyncComponent</a>。</p>
+</blockquote>
+<p><code>resolveAsyncComponent</code> 的主要功能是定义 <code>Ctor</code> 所需要的 <code>resolve</code> 、<code>reject</code> 函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// factory 为 Ctor</span></span><br><span class="line">factory(resolve, reject)</span><br></pre></td></tr></table></figure>
+
+<p>以 <code>resolve</code> 函数为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resolve = once(<span class="function">(<span class="params">res: <span class="built_in">Object</span> | Class&lt;Component&gt;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 缓存 resolved</span></span><br><span class="line">    factory.resolved = ensureCtor(res, baseCtor)</span><br><span class="line">    <span class="comment">// 强制渲染</span></span><br><span class="line">    <span class="keyword">if</span> (!sync) &#123;</span><br><span class="line">    	forceRender(<span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>once</code> 字面理解，就是只调用一次。当 <code>Ctor</code> 中 <code>setTimeout</code> 结束时调用。</p>
+<p><code>ensureCtor</code> 就是 <code>Vue.extend</code> 的封装以适应不同场景，所以 <code>resolve</code> 函数的主要功能就是在异步完成时，将得到的 <code>Ctor</code> 转化为构造函数，缓存在 <code>factory.resolved</code> 中。</p>
+<p>之后利用 <code>forceRender(true)</code> 强制重新 render，由于之前缓存了 <code>factory.resolved</code>，<code>resolveAsyncComponent</code> 函数就直接返回了组件的构造函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isDef(factory.resolved)) &#123;</span><br><span class="line">    <span class="keyword">return</span> factory.resolved</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后就与普通组件一致了。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/19/Components/" class="post-title-link" itemprop="url">Components</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-19 14:21:23 / 修改时间：14:21:31" itemprop="dateCreated datePublished" datetime="2019-07-19T14:21:23+08:00">2019-07-19</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/understand-async-programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -882,7 +1233,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -924,7 +1275,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
