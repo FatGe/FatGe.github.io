@@ -96,14 +96,14 @@
 
 
   <meta name="description" content="动态组件 &amp;amp; 异步组件的存在，使得我们更方便地控制首屏代码的体积，加快加载速度。  抛开具体细节不谈，一个普通 Vue 组件从创建到展现在页面里，主要经历了以下流程： 123456789// 组件 Object&amp;#123;    template: &apos;&amp;lt;div&amp;gt;I am async!&amp;lt;/div&amp;gt;&apos;&amp;#125;// 经过 compileToFunctions 得到对">
-<meta name="keywords" content="vue,javascript">
+<meta name="keywords" content="javascript,vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 动态组件 &amp; 异步组件原理">
-<meta property="og:url" content="http://yoursite.com/2019/07/19/Vue-Dynamic-Components/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/07/19/vue-dynamic-components/index.html">
 <meta property="og:site_name" content="Yzz的神秘商店💪">
 <meta property="og:description" content="动态组件 &amp;amp; 异步组件的存在，使得我们更方便地控制首屏代码的体积，加快加载速度。  抛开具体细节不谈，一个普通 Vue 组件从创建到展现在页面里，主要经历了以下流程： 123456789// 组件 Object&amp;#123;    template: &apos;&amp;lt;div&amp;gt;I am async!&amp;lt;/div&amp;gt;&apos;&amp;#125;// 经过 compileToFunctions 得到对">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-19T06:22:10.440Z">
+<meta property="og:updated_time" content="2019-07-24T01:07:03.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 动态组件 &amp; 异步组件原理">
 <meta name="twitter:description" content="动态组件 &amp;amp; 异步组件的存在，使得我们更方便地控制首屏代码的体积，加快加载速度。  抛开具体细节不谈，一个普通 Vue 组件从创建到展现在页面里，主要经历了以下流程： 123456789// 组件 Object&amp;#123;    template: &apos;&amp;lt;div&amp;gt;I am async!&amp;lt;/div&amp;gt;&apos;&amp;#125;// 经过 compileToFunctions 得到对">
@@ -114,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/07/19/Vue-Dynamic-Components/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/19/vue-dynamic-components/">
 
 
 
@@ -354,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Vue-Dynamic-Components/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/vue-dynamic-components/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yzz">
@@ -397,13 +397,23 @@
                 
               
 
-              <time title="创建时间：2019-07-19 14:21:29 / 修改时间：14:22:10" itemprop="dateCreated datePublished" datetime="2019-07-19T14:21:29+08:00">2019-07-19</time>
+              <time title="创建时间：2019-07-19 14:21:29" itemprop="dateCreated datePublished" datetime="2019-07-19T14:21:29+08:00">2019-07-19</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-24 09:07:03" itemprop="dateModified" datetime="2019-07-24T09:07:03+08:00">2019-07-24</time>
+              </span>
             
           
 
@@ -524,9 +534,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/vue/" rel="tag"># vue</a>
-          
             <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
           
         </div>
       
@@ -539,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/19/Components/" rel="next" title="Components">
-                <i class="fa fa-chevron-left"></i> Components
+              <a href="/2019/07/18/understand-async-programming/" rel="next" title="深入理解异步编程的原理">
+                <i class="fa fa-chevron-left"></i> 深入理解异步编程的原理
               </a>
             
           </div>
@@ -548,6 +558,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/21/js-type-detection/" rel="prev" title="js-type-detection">
+                js-type-detection <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -630,7 +644,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -655,7 +671,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

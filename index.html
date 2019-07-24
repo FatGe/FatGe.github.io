@@ -350,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Vue-Dynamic-Components/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/21/js-type-detection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yzz">
@@ -370,7 +370,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/19/Vue-Dynamic-Components/" class="post-title-link" itemprop="url">Vue 动态组件 & 异步组件原理</a>
+                <a href="/2019/07/21/js-type-detection/" class="post-title-link" itemprop="url">js-type-detection</a>
               
             
           </h1>
@@ -395,13 +395,331 @@
                 
               
 
-              <time title="创建时间：2019-07-19 14:21:29 / 修改时间：14:22:10" itemprop="dateCreated datePublished" datetime="2019-07-19T14:21:29+08:00">2019-07-19</time>
+              <time title="创建时间：2019-07-21 17:16:16" itemprop="dateCreated datePublished" datetime="2019-07-21T17:16:16+08:00">2019-07-21</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-24 09:10:30" itemprop="dateModified" datetime="2019-07-24T09:10:30+08:00">2019-07-24</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://fatge.xyz/static/img/js-types.png" alt="js 基本数据类型"></p>
+<p>JS 的基本数据类型有 <code>Number</code>，<code>String</code>，<code>Boolean</code>，<code>Symbol</code>，<code>Null</code>，<code>Undefined</code>，六种数据类型。一种引用类型 <code>object</code>。</p>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>数值，根据 ECMAScript 标准，JavaScript 中只有一种数字类型：基于 IEEE 754 标准的双精度 64 位二进制格式的值（-(263 -1) 到 263 -1）。<strong>它并没有为整数给出一种特定的类型</strong>。</p>
+<p>除了能够表示浮点数外，还有一些带符号的值：<code>+Infinity</code>，<code>-Infinity</code> 和 <code>NaN</code> (非数值，Not-a-Number)。</p>
+<p>对应 <strong>lodash</strong> 中的检测函数有</p>
+<ul>
+<li><code>isNumber</code> 检查 <code>value</code> 是否是原始 <code>Number</code> 数值型 或者 对象；</li>
+<li><code>isInteger</code> 检查 <code>value</code> 是否为一个整数；</li>
+<li><code>isNaN</code> 检测 <code>value</code> 是否为 <code>NaN</code>；</li>
+<li><code>isFinite</code> 检测 <code>value</code> 是否是原始有限数值。</li>
+</ul>
+<h5 id="isNumber"><a href="#isNumber" class="headerlink" title="isNumber"></a><code>isNumber</code></h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> value == <span class="string">'number'</span> ||</span><br><span class="line">    (isObjectLike(value) &amp;&amp; getTag(value) == <span class="string">'[object Number]'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>typeof</code> 操作符可以返回一个字符串，表示未经计算的操作数的类型。对于 Number、String、Boolean、Undefined、String 可以很明确的得到它的类型。</p>
+<p>那么 <strong>lodash</strong> 为什么还要添加 <code>(isObjectLike(value) &amp;&amp; getTag(value) == &#39;[object Number]&#39;)</code>？</p>
+<p>原因在于，JS 中也允许我们以如下形式创建一个数值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(value) <span class="comment">// log 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> value) <span class="comment">// log "object"</span></span><br></pre></td></tr></table></figure>
+
+<p>这时，单单只是使用 <code>typeof</code> 操作符就没法判断 <code>value</code> 的类型是否为数值。所以要结合以下两个函数来判断，<code>value</code> 是否为 <code>object</code> 然后再通过过 <code>toString()</code>  来获取每个对象的类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTag</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> value === <span class="literal">undefined</span> ? <span class="string">'[object Undefined]'</span> : <span class="string">'[object Null]'</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(value)  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObjectLike</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> value == <span class="string">'object'</span> &amp;&amp; value !== <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Object.prototype.toString.call</code> 每个对象都有一个<code>toString()</code>方法，当该对象被表示为一个文本值时，或者一个对象以预期的字符串方式引用时自动调用。</p>
+</blockquote>
+<h5 id="isInteger"><a href="#isInteger" class="headerlink" title="isInteger"></a><code>isInteger</code></h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isInteger</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> </span><br><span class="line">    	<span class="keyword">typeof</span> value == <span class="string">'number'</span> </span><br><span class="line">    	&amp;&amp; value == toInteger(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>检查 <code>value</code> 是否为一个整数，判断是否 <code>value</code> 的类型是否为数值，并且是否与 Int 型相同。其取整过程如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toInteger</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = toFinite(value),</span><br><span class="line">        remainder = result % <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result === result ? </span><br><span class="line">        (remainder ? result - remainder : result) : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="isNaN"><a href="#isNaN" class="headerlink" title="isNaN"></a><code>isNaN</code></h5><p>检查 <code>value</code> 是否是 <code>NaN</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNaN</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> isNumber(value) &amp;&amp; value != +value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与 ES 2015 的 <code>isNaN</code> 不同的是，对于 <code>undefined</code>，<code>{}</code>，原生的结果是 <code>true</code>，而 <strong>lodash</strong> 为 <code>false</code>。这是因为如果<code>isNaN</code>函数的参数不是<code>Number</code>类型， <code>isNaN</code>函数会首先尝试将这个参数转换为数值，然后才会对转换后的结果是否是<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN" target="_blank" rel="noopener"><code>NaN</code></a>进行判断。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// js native isNaN</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">isNaN</span> = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = <span class="built_in">Number</span>(value);</span><br><span class="line">    <span class="keyword">return</span> n !== n;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>但是无论是 ES 2015 还是 <strong>lodash</strong>，它们本质上都是利用 <code>x != x</code> 来判断 <code>NaN</code>。</p>
+<h5 id="isFinite"><a href="#isFinite" class="headerlink" title="isFinite"></a><code>isFinite</code></h5><p>检查 <code>value</code> 是否是原始有限数值。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFinite</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> value == <span class="string">'number'</span> </span><br><span class="line">    	&amp;&amp; nativeIsFinite(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用原生的 <code>isFinite</code> 结合 <code>typeof</code> 判断数字是否为有限值。</p>
+<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>String 类型用于表示由零或多个16 位Unicode 字符组成的字符序列，即字符串。用于保存可以以文本形式表示的数据非常有用。</p>
+<p> 值得注意的是，不单单要注意<strong>基本字符串</strong>，还需要注意<strong>字符串对象</strong>，字符串字面量 (通过单引号或双引号定义) 和 直接调用 String 方法(没有通过 new 生成字符串对象实例)的字符串都是基本字符串。</p>
+<blockquote>
+<p>JavaScript会自动将基本字符串转换为字符串对象，只有将基本字符串转化为字符串对象之后才可以使用字符串对象的方法。</p>
+</blockquote>
+<p>与之前的 number 类似，利用构造函数 <code>String</code> 创建的字符串是一个 <code>object</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> s_prim = <span class="string">"foo"</span>;</span><br><span class="line"><span class="keyword">const</span> s_obj = <span class="keyword">new</span> <span class="built_in">String</span>(s_prim);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s_prim); <span class="comment">// Logs "string"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s_obj);  <span class="comment">// Logs "object"</span></span><br></pre></td></tr></table></figure>
+
+<p>所以检测字符串，除了基本字符串以外还要注意字符串对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isString</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> type = <span class="keyword">typeof</span> value</span><br><span class="line">  <span class="keyword">return</span> </span><br><span class="line">    type == <span class="string">'string'</span> || </span><br><span class="line">        (type == <span class="string">'object'</span> </span><br><span class="line">         	&amp;&amp; value != <span class="literal">null</span> </span><br><span class="line">         	&amp;&amp; !<span class="built_in">Array</span>.isArray(value) </span><br><span class="line">         	&amp;&amp; getTag(value) == <span class="string">'[object String]'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以利用 <code>typeof</code> 检测基本字符串，对于模板字符串采用了之前介绍的方案  <code>getTag</code> 来获取 <code>value</code> 的类型。</p>
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>Boolean 类型是ECMAScript 中使用得最多的一种类型，该类型只有两个字面值：<code>true</code> 和 <code>false</code>。同样也需要区分基本的 Boolean 类型以及 Boolean 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isBoolean</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> </span><br><span class="line">    value === <span class="literal">true</span> || value === <span class="literal">false</span> ||</span><br><span class="line">    (isObjectLike(value) </span><br><span class="line">     &amp;&amp; getTag(value) == <span class="string">'[object Boolean]'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大部分在之前都已经涉及到了，这里出现了 <code>isObjectLike</code>，那么它是做什么的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObjectLike</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> value == <span class="string">'object'</span> &amp;&amp; value !== <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原来只是检测是否是一个非 <code>null</code>  的对象。</p>
+<h4 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h4><p>ES6 引入了一种新的原始数据类型<code>Symbol</code>，表示独一无二的值。Symbol 值通过<code>Symbol</code>函数生成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSymbol</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> type = <span class="keyword">typeof</span> value</span><br><span class="line">  <span class="keyword">return</span> type == <span class="string">'symbol'</span> || </span><br><span class="line">      (isObjectLike(value) &amp;&amp; </span><br><span class="line">       getTag(value) == <span class="string">'[object Symbol]'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会发现 <code>(isObjectLike(value) &amp;&amp; getTag(value) == &#39;[object Symbol]&#39;)</code>，也对 Symbol 对象进行检测，但是如果直接 <code>new Symbol</code> 会 log 出 <code>TypeError</code>。</p>
+<p>那么 <strong>lodash</strong> 为什么要对其进行检测，原来是创建一个显式包装器对象从 ECMAScript 6 开始不再被支持，现在可以利用如下代码来模拟，虽然没什么用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sym = <span class="built_in">Symbol</span>(<span class="string">"foo"</span>);</span><br><span class="line"><span class="keyword">typeof</span> sym;     <span class="comment">// "symbol"</span></span><br><span class="line"><span class="keyword">const</span> symObj = <span class="built_in">Object</span>(sym);</span><br><span class="line"><span class="keyword">typeof</span> symObj;  <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>Undefined 类型只有一个值，即特殊的 <code>undefined</code>。在使用 <code>let</code> 或 <code>var</code> 声明变量但未对其加以初始化时，这个变量的值就是 <code>undefined</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUndefined</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value === <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>Null 类型是只有一个值的数据类型，这个特殊的值是 <code>null</code> 。与 <code>undefined</code> 不同的是，它是一个字面量，而 <code>undefined</code> 是全局对象的一个属性。</p>
+<p>从逻辑角度来看，null 值表示一个空对象指针，<code>null</code> 是表示缺少的标识，指示变量未指向任何对象。而这也正是使用typeof 操作符检测null 值时会返回”object”的原因。</p>
+<p>对其的判断也非常的简单，只需要</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNull</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value === <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然你也可以使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>))</span><br><span class="line"><span class="comment">// [object Null]</span></span><br></pre></td></tr></table></figure>
+
+<p>以上是基本数据类型的判断，总结一下，主要是利用 <code>typeOf</code> 以及 <code>Object.prototype.toString</code> ，还有一些特殊值的特性。下面开始分析引用类型 <code>Object</code></p>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>引用类型的值（对象）是引用类型的一个实例。在ECMAScript 中，引用类型是一种数据结构，用于将数据和功能组织在一起。具体的有 <code>Object</code> 、<code>Array</code>、<code>Date</code>、<code>Error</code>、<code>RegExp</code>、<code>Function</code>，还有ES2015 引入 <code>Set</code>、<code>Map</code>、<code>WeakSet</code>、<code>WeakMap</code>。</p>
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>ECMAScript 中的对象其实就是一组数据和功能的集合。它有一个很重要的用途，就是在 JavaScript 中的所有对象都来自 <code>Object</code>；所有对象从<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype" target="_blank" rel="noopener"><code>Object.prototype</code></a>继承方法和属性，尽管它们可能被覆盖。即在ECMAScript 中，Object 类型是所有它的实例的基础。</p>
+<p>所以 <strong>Lodash</strong> 去判断 <code>value</code> 是否为 <code>Object</code> 时，只使用了 <code>typeOf</code> 操作即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> type = <span class="keyword">typeof</span> value</span><br><span class="line">  <span class="keyword">return</span> value != <span class="literal">null</span> &amp;&amp; </span><br><span class="line">      (type == <span class="string">'object'</span> || type == <span class="string">'function'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h4><p><strong>Function 构造函数</strong> 创建一个新的Function对象。 在 JavaScript 中, 每个函数实际上都是一个<code>Function对象。</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFunction</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isObject(value)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> tag = getTag(value)</span><br><span class="line">  <span class="keyword">return</span> tag == <span class="string">'[object Function]'</span> || </span><br><span class="line">      	tag == <span class="string">'[object AsyncFunction]'</span> ||</span><br><span class="line">    	tag == <span class="string">'[object GeneratorFunction]'</span> || </span><br><span class="line">      	tag == <span class="string">'[object Proxy]'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有个问题，<code>typeOf</code> 可以检测 Function对象的类型为 <code>Function</code>， 那为什么还需要 <code>Object.prototype.toString</code> 呢？</p>
+<blockquote>
+<p><em>// in Safari 9 which returns ‘object’ for typed arrays and other constructors.</em></p>
+</blockquote>
+<h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><p>Array 在 ECMAScript 中代表数组，它的每一项可以保存任何类型的数据。</p>
+<p>对它的常规检测就是 <code>Array.isArray</code>，<strong>Lodash</strong> 也是使用这个 API，如果需要 Polyfill 方案的话，可以使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// plan 1</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(value) === <span class="string">'[object Array]'</span></span><br><span class="line"><span class="comment">// plan 2</span></span><br><span class="line">value.constructor === <span class="built_in">Array</span></span><br></pre></td></tr></table></figure>
+
+<p>之前还有 <code>value instanceof Array</code> 会什么问题么？</p>
+<blockquote>
+<p>在存在不同全局变量的环境，通过语义 <code>instanceof</code> 检测数组的时候，<code>value instanceof Array</code>只有当 <code>value</code> 是由该页面的原始 <code>Array</code> 构造函数创建的数组时才能正常工作。</p>
+<p>具体请见，<a href="http://web.mit.edu/jwalden/www/isArray.html。" target="_blank" rel="noopener">http://web.mit.edu/jwalden/www/isArray.html。</a></p>
+</blockquote>
+<h4 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h4><p>ECMAScript 中的 Date 类型是在早期Java 中的java.util.Date 类基础上构建的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nodeIsDate = nodeTypes &amp;&amp; nodeTypes.isDate</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isDate = nodeIsDate</span><br><span class="line">  ? <span class="function">(<span class="params">value</span>) =&gt;</span> nodeIsDate(value)</span><br><span class="line">  : <span class="function">(<span class="params">value</span>) =&gt;</span> isObjectLike(value) &amp;&amp; getTag(value) == <span class="string">'[object Date]'</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Lodash</strong> 分为两个环境来处理这个问题，如果是 Node 就利用 <code>util.types.isDate(value)</code> 来检测，如果是在游览器，就还是通过 <code>Object.prototype.toString</code> 来判断。</p>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p>ES2015 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isSet = nodeIsSet</span><br><span class="line">  ? <span class="function">(<span class="params">value</span>) =&gt;</span> nodeIsSet(value)</span><br><span class="line">  : <span class="function">(<span class="params">value</span>) =&gt;</span> isObjectLike(value) &amp;&amp; getTag(value) == <span class="string">'[object Set]'</span></span><br></pre></td></tr></table></figure>
+
+<p>同样的还有 <code>Map</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isMap = nodeIsMap</span><br><span class="line">  ? <span class="function">(<span class="params">value</span>) =&gt;</span> nodeIsMap(value)</span><br><span class="line">  : <span class="function">(<span class="params">value</span>) =&gt;</span> isObjectLike(value) &amp;&amp; getTag(value) == <span class="string">'[object Map]'</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h4><p>WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isWeakSet</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> isObjectLike(value) &amp;&amp; getTag(value) == <span class="string">'[object WeakSet]'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也是利用 <code>Object.prototype.toString</code> ，同样还有 <code>WeakMap</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isWeakMap</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> isObjectLike(value) &amp;&amp; getTag(value) == <span class="string">'[object WeakMap]'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h4><p>当运行时错误产生时，Error的实例对象会被抛出。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isError</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isObjectLike(value)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">const</span> tag = getTag(value)</span><br><span class="line">  <span class="keyword">return</span> tag == <span class="string">'[object Error]'</span> || </span><br><span class="line">      tag == <span class="string">'[object DOMException]'</span> ||</span><br><span class="line">    (<span class="keyword">typeof</span> value.message == <span class="string">'string'</span> &amp;&amp; <span class="keyword">typeof</span> value.name == <span class="string">'string'</span> &amp;&amp; !isPlainObject(value))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有之前一致的 <code>Object.prototype.toString</code> 依然可以用来判断对象是否是一个 Error，除此之外，如果对象满足以下条件，也可以被视为一个 Error</p>
+<ul>
+<li>具备 <code>message</code>、<code>name</code> 属性，且值为 <code>string</code>；</li>
+<li>是普通对象。 也就是说该对象由 <code>Object</code> 构造函数创建，或者 <code>[[Prototype]]</code> 为 <code>null</code> 。</li>
+</ul>
+<p>那么如何检测普通对象呢?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPlainObject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isObjectLike(value) || getTag(value) != <span class="string">'[object Object]'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Object</span>.getPrototypeOf(value) === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> proto = value</span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">Object</span>.getPrototypeOf(proto) !== <span class="literal">null</span>) &#123;</span><br><span class="line">    proto = <span class="built_in">Object</span>.getPrototypeOf(proto)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.getPrototypeOf(value) === proto</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要是利用 <code>Object.getPrototypeOf()</code> 方法返回指定对象的原型（内部<code>[[Prototype]]</code>属性的值），同时和 <code>value</code> 本身的 <code>[[Prototype]]</code> 做判断。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/vue-dynamic-components/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/19/vue-dynamic-components/" class="post-title-link" itemprop="url">Vue 动态组件 & 异步组件原理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-19 14:21:29" itemprop="dateCreated datePublished" datetime="2019-07-19T14:21:29+08:00">2019-07-19</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-24 09:07:03" itemprop="dateModified" datetime="2019-07-24T09:07:03+08:00">2019-07-24</time>
+              </span>
             
           
 
@@ -495,155 +813,6 @@
 
 <p>之后就与普通组件一致了。</p>
 
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/Components/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yzz">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yzz的神秘商店💪">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/19/Components/" class="post-title-link" itemprop="url">Components</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-19 14:21:23 / 修改时间：14:21:31" itemprop="dateCreated datePublished" datetime="2019-07-19T14:21:23+08:00">2019-07-19</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
           
         
       
@@ -1252,7 +1421,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1277,7 +1448,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
