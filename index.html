@@ -350,6 +350,283 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/react-lifecycle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/26/react-lifecycle/" class="post-title-link" itemprop="url">React v16 生命周期函数详解：如何、何时使用它们（React 组件生命周期的修订和最新指南）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-26 14:52:25 / 修改时间：15:01:00" itemprop="dateCreated datePublished" datetime="2019-07-26T14:52:25+08:00">2019-07-26</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>翻译自  <a href="https://blog.bitsrc.io/react-16-lifecycle-methods-how-and-when-to-use-them-f4ad31fb2282" target="_blank" rel="noopener">React 16 Lifecycle Methods: How and When to Use Them</a>，作者：<a href="https://blog.bitsrc.io/@scottdomes" target="_blank" rel="noopener">Scott Domes</a></p>
+<p>参考 <a href="https://reactjs.org/docs/react-component.html" target="_blank" rel="noopener">React.Component</a></p>
+</blockquote>
+<p><em>概述：最近在学习 react v16.8.4，发现组件的生命周期发生了一些变化，原有的一些方法被废弃，所以看了官方API介绍，再结合上述文章，做个总结。</em></p>
+<p>由于这次生命周期 API 有点复杂，我将这些方法分为四个部分：安装（Mounting），更新（Updating），卸载（Unmounting）和异常（Error）。</p>
+<hr>
+<h3 id="Mounting-组件的挂载"><a href="#Mounting-组件的挂载" class="headerlink" title="Mounting - 组件的挂载"></a>Mounting - 组件的挂载</h3><p>├── <a href="https://reactjs.org/docs/react-component.html#constructor" target="_blank" rel="noopener"><strong>constructor</strong></a></p>
+<p>├── <a href="https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops" target="_blank" rel="noopener"><strong>static getDerivedStateFromProps</strong></a></p>
+<p>├── <a href="https://reactjs.org/docs/react-component.html#render" target="_blank" rel="noopener"><strong>render</strong></a></p>
+<p>├── <a href="https://reactjs.org/docs/react-component.html#componentdidmount" target="_blank" rel="noopener"><strong>componentDidMount</strong></a></p>
+<h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h4><blockquote>
+<p>如果您的组件是 Class Component，则调用的第一就是组件构造函数。 这不适用于 Functional Component。</p>
+</blockquote>
+<p>相关构造函数可能是如下形式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      counter: <span class="number">0</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>构造函数的参数为 props，<strong>你可以利用 <code>super</code> 来传入</strong>。</p>
+<p>在构造函数中，你可以初始化 state、设定默认值。甚至你可以依据 props 来创建 state。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      counter: props.initialCounterValue,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>，现在构造函数是可选的，如果您的 Babel 设置支持 class fields，就可以像这样初始化状态：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    counter: <span class="number">0</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>这种方法是被大家所提倡的</strong>。 你仍然可以根据 props 创建 state：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    counter: <span class="keyword">this</span>.props.initialCounterValue,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是，如果需要使用 ref ，就仍需要构造函数。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grid</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      blocks: [],</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 在 constructor 中创建 ref</span></span><br><span class="line">    <span class="keyword">this</span>.grid = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们需要构造函数来调用 createRef，以创建对 <strong>HTMLElement</strong> 元素的引用。还可以使用构造函数进行函数绑定，这也是可选的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grid</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      blocks: [],</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">this</span>.handleChange.bind(<span class="keyword">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 2 等同于 1</span></span><br><span class="line">  handleChange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>constructor总结：</strong> 构造函数的最常法：设置 state，创建 ref 和方法绑定。</p>
+<h4 id="getDerivedStateFromProps"><a href="#getDerivedStateFromProps" class="headerlink" title="getDerivedStateFromProps"></a>getDerivedStateFromProps</h4><blockquote>
+<p>挂载时，getDerivedStateFromProps 是渲染前调用的最后一个方法</p>
+</blockquote>
+<p> 一般使用 getDerivedStateFromProps 可以根据初始 props 使用它来设置状态。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> getDerivedStateFromProps(props, state) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">blocks</span>: createBlocks(props.numberOfBlocks) &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// log &#123;blocks: Array(20)&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.state);</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中依据 props.numberOfBlocks 来初始化期望的 state（函数return为状态）。</p>
+<p><strong>注意：</strong> 我们可以将此代码放在 constructor 中，与之相 getDerivedStateFromProps的优点是它更<strong>直观</strong> - 它仅用于设置状态，而构造函数有多种用途。</p>
+<p><strong>总结：</strong> getDerivedStateFromProps 的最常见用例（在mount期间）：根据初始props返回状态对象。</p>
+<h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><p>完成所有渲染的工作。它返回实际组件的 JSX，使用React时，将花费大部分时间在这里。</p>
+<p>渲染的最常见用例：返回 JSX 组件。</p>
+<h4 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount"></a>componentDidMount</h4><blockquote>
+<p>在第一次渲染组件之后，触发此方法。</p>
+</blockquote>
+<p>如果需要加载数据，请在此处执行。 不要尝试在 constructor 中加载数据或渲染，原因，<a href="https://tylermcginnis.com/react-interview-questions/" target="_blank" rel="noopener">react-interview-questions</a>.</p>
+<blockquote>
+<p>由于AJAX是异步的，所以无法保证在组件挂载之前 AJAX 请求完成解析。 如果确实如此，那就意味着你要在未挂载的组件上尝试 setState，这不仅不起作用，而且 React 报错。 在componentDidMount中执行 AJAX 将保证有一个要更新的组件。</p>
+</blockquote>
+<p>componentDidMount 触发时，组件已完成第一 render，所以可以进行一些操作：</p>
+<ul>
+<li>在刚刚渲染的 <code>&lt;canvas&gt;</code> 元素上进行绘制</li>
+<li>访问 DOM 节点</li>
+<li>添加事件侦听器</li>
+</ul>
+<p>基本上，在这里你可以做所有依赖 DOM 的设置，并开始获得你需要的所有数据，例如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    <span class="comment">// 利用 ref 访问 dom 元素</span></span><br><span class="line">    <span class="keyword">this</span>.bricks = initializeGrid(<span class="keyword">this</span>.grid.current);</span><br><span class="line">    <span class="keyword">this</span>.interval = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// ajax 获取数据</span></span><br><span class="line">      <span class="keyword">this</span>.addBlocks();</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong> 调用 AJAX 以加载组件的数据。</p>
+<h3 id="Updating-组件的更新"><a href="#Updating-组件的更新" class="headerlink" title="Updating - 组件的更新"></a>Updating - 组件的更新</h3><p>├── <a href="https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops" target="_blank" rel="noopener"><strong>static getDerivedStateFromProps</strong></a> </p>
+<p>├── <a href="https://reactjs.org/docs/react-component.html#shouldcomponentupdate" target="_blank" rel="noopener"><strong>shouldComponentUpdate</strong></a></p>
+<p>├── <a href="https://reactjs.org/docs/react-component.html#render" target="_blank" rel="noopener"><strong>render</strong></a></p>
+<p>├── <a href="https://reactjs.org/docs/react-component.html#getsnapshotbeforeupdate" target="_blank" rel="noopener"><strong>getSnapshotBeforeUpdate</strong></a></p>
+<p>├── <a href="https://reactjs.org/docs/react-component.html#shouldcomponentupdate" target="_blank" rel="noopener"><strong>componentDidUpdate</strong></a></p>
+<h4 id="getDerivedStateFromProps-1"><a href="#getDerivedStateFromProps-1" class="headerlink" title="getDerivedStateFromProps"></a>getDerivedStateFromProps</h4><blockquote>
+<p>是的，再来一次。 现在，它更有用了。</p>
+</blockquote>
+<p>如果您需要根据 props 来更新 state，可以通过 return 新的状态对象来完成该任务。</p>
+<p><strong>注，不建议依据 props 来处理 state</strong>，也就是说，只有逼不得已才使用该方法。 以下是一些例子：</p>
+<ul>
+<li>当 video 、audio 的 source 改变时，需要重置元素；</li>
+<li>Server 资源更新后需要恢复 UI 元素；</li>
+<li>当内容改变时关闭相关元素。</li>
+</ul>
+<p>即使有上述情况，通常也有更好的方法。 但是 getDerivedStateFromProps 可以情况变得更坏。</p>
+<p><strong>总结：</strong> getDerivedStateFromProps 一般用于 props 不足以支撑业务时，利用它来更新 state。</p>
+<p><strong>shouldComponentUpdate</strong></p>
+<blockquote>
+<p>典型的 React 哲学，当一个组件收到新的 State 或 Props时，它应该更新。</p>
+</blockquote>
+<p>但我们的组件有点困惑，它不确定是否要进行更新。</p>
+<p>shouldComponentUpdate 方法的第一个参数为 nextProps，第二个参数为 nextState。shouldComponentUpdate 返回一个布尔值，用于控制组件是否更新。</p>
+<p>shouldComponentUpdate 赋予我们一项能力，只有在你关心的 props 改变时组件会才更新。</p>
+<p><strong>总结：</strong> 可以准确地控制组件重新渲染的时间，常用于优化 React，<a href="https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56" target="_blank" rel="noopener">具体</a>。</p>
+<h4 id="render-同上"><a href="#render-同上" class="headerlink" title="render - 同上"></a>render - 同上</h4><h4 id="getSnapshotBeforeUpdate"><a href="#getSnapshotBeforeUpdate" class="headerlink" title="getSnapshotBeforeUpdate"></a>getSnapshotBeforeUpdate</h4><blockquote>
+<p>新添加的方法，触发时刻在 render 之后，最新的渲染输出提交给 DOM 之前。</p>
+</blockquote>
+<p>调用渲染和最后显示更改之间可能会有延迟， 如果你需要获取 DOM 改变之前的一些信息时，可以利用这个钩子函数。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/28/169c43c6f8861ce2?w=1280&h=720&f=png&s=11387" alt></p>
+<p>从渲染到提交这个过程是异步的，所以如果在 componentWillUpdate 访问 DOM 信息，在 componentDidUpdate 使用时，该信息可能发生了修改，这一部分以官网的例子来说明</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrollingList</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  listRef = React.createRef();</span><br><span class="line"></span><br><span class="line">  getSnapshotBeforeUpdate(prevProps, prevState) &#123;</span><br><span class="line">    <span class="comment">// 如果在列表中添加新项目</span></span><br><span class="line">    <span class="comment">// 获取列表的当前高度，以便我们稍后调整滚动</span></span><br><span class="line">    <span class="keyword">if</span> (prevProps.list.length &lt; <span class="keyword">this</span>.props.list.length) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.listRef.current.scrollHeight;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidUpdate(prevProps, prevState, snapshot) &#123;</span><br><span class="line">    <span class="comment">// 如果我们 snapshot 的值不为空，说明添加了新项目</span></span><br><span class="line">    <span class="comment">// 调整滚动，以便这些新项目不会将旧项目推出可视区域</span></span><br><span class="line">    <span class="keyword">if</span> (snapshot !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.listRef.current.scrollTop +=</span><br><span class="line">        <span class="keyword">this</span>.listRef.current.scrollHeight - snapshot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div ref=&#123;<span class="keyword">this</span>.listRef&#125;&gt;&#123;<span class="comment">/* ...contents... */</span>&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong> 查看当前 DOM 的某些属性，并将该值传递给componentDidUpdat。</p>
+<h4 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate"></a>componentDidUpdate</h4><blockquote>
+<p>所有的改变都已经提交给 DOM。</p>
+</blockquote>
+<p>componentDidUpdate 包含三个参数，之前的 props、state，以及 getSnapshotBeforeUpdate 的返回值，具体如上述例子。</p>
+<p><strong>总结：</strong> 对已经改变的 Dom 作出相关响应。</p>
+<h3 id="Unmounting"><a href="#Unmounting" class="headerlink" title="Unmounting"></a>Unmounting</h3><h4 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h4><blockquote>
+<p>组件快要结束了。</p>
+</blockquote>
+<p>在组件注销之前，它会询问您是否有任何最后一刻的请求。</p>
+<p>您可以在此处取消任何传出网络请求，或删除与该组件关联的所有事件侦听器。</p>
+<p>基本上，清理任何事情都只涉及有问题的组件 - 当它消失时，它应该完全消失。</p>
+<p><strong>总结：</strong> 清除事件监听、定时器等，防止内存泄漏。</p>
+<h3 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h3><h4 id="getDerivedStateFromError"><a href="#getDerivedStateFromError" class="headerlink" title="getDerivedStateFromError"></a>getDerivedStateFromError</h4><blockquote>
+<p>发生了一些异常。</p>
+</blockquote>
+<p>它能够捕捉在他们的子组件树中任意地方的 JavaScript 错误，记录这些错误。当我们要展示一个 error 页面时，可以利用它来完成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> getDerivedStateFromError(error) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">hasError</span>: <span class="literal">true</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> 您必须返回更新的状态对象。 不要将此方法用于任何副作用。 而是使用下面的 componentDidCatch。</p>
+<p><strong>总结：</strong> 依据错误信息来修改组件的 state，同时展示出 error 页面。</p>
+<h4 id="componentDidCatch"><a href="#componentDidCatch" class="headerlink" title="componentDidCatch"></a>componentDidCatch</h4><blockquote>
+<p>与上面非常相似，因为它在子组件中发生错误时被触发。</p>
+</blockquote>
+<p>与 getDerivedStateFromError 区别在于不是为了响应错误而更新状态，可以执行任何副作用，例如记录错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">componentDidCatch(error, info) &#123;</span><br><span class="line">  sendErrorLog(error, info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> componentDidCatch 仅会捕获渲染/生命周期方法中的错误。 如果在单击处理程序中引发错误，则不会捕获它。</p>
+<p>通常只在特殊的地方使用错误边界组件的 componentDidCatch。 这些组件包装子树的唯一目的是捕获和记录错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">errorMessage</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">  <span class="keyword">static</span> getDerivedStateFromError(error) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">errorMessage</span>: error.message &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidCatch(error, info) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error, info);</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.errorMessage) &#123;</span><br><span class="line">      <span class="keyword">return</span> &lt;h1&gt;Oops! &#123;this.state.errorMessage&#125;&lt;/h1&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结：</strong> 捕获、打印出错误信息。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上是React v16的生命周期钩子所适用的场景和具体使用方法。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/21/js-type-detection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1395,7 +1672,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
