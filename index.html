@@ -350,6 +350,251 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/23/react-sortable-hoc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/23/react-sortable-hoc/" class="post-title-link" itemprop="url">React-sortable-hoc 结合 hook 实现 Draggin 和 Droppin</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-23 09:40:14 / 修改时间：09:42:42" itemprop="dateCreated datePublished" datetime="2019-08-23T09:40:14+08:00">2019-08-23</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>翻译：<a href="https://css-tricks.com/draggin-and-droppin-in-react/" target="_blank" rel="noopener">https://css-tricks.com/draggin-and-droppin-in-react/</a></p>
+</blockquote>
+<p>React 社区提供了许多的库来实现拖放的功能，例如 <a href="https://github.com/react-dnd/react-dnd" target="_blank" rel="noopener">react-dnd</a>, <a href="https://github.com/atlassian/react-beautiful-dnd" target="_blank" rel="noopener">react-beautiful-dnd</a>, <a href="https://www.npmjs.com/package/react-drag-and-drop" target="_blank" rel="noopener">react-drag-n-drop</a>，等等。但是它们有一些共同的缺陷：</p>
+<ul>
+<li>使用复杂，有时候需要做很多工作才能构建一个简单的拖放演示；</li>
+<li>功能有限，例如无法实现多个拖放实例这样复杂的功能，如果有的话，它也会变得非常复杂。</li>
+</ul>
+<p>为了解决这些问题，<a href="https://github.com/clauderic/react-sortable-hoc" target="_blank" rel="noopener">react-sortable-hoc</a> 应运而生。</p>
+<blockquote>
+<p>这篇教程需要你提前了解一些 React 组件以及 hooks 的基础知识。</p>
+</blockquote>
+<p>React 官方推荐的封装高阶组件的方式是 HOC，我们需要借助它来实现一个具有拖放功能的高阶组件。</p>
+<blockquote>
+<p>HOC 自身不是 React API 的一部分，它是一种基于 React 的组合特性而形成的设计模式。</p>
+</blockquote>
+<h2 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h2><p>教程最终的目的是构建一个带有趣GIF的应用程序（来自Chris Gannon！），可以在视口周围拖动。具体见</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/19/16ca874b8da23ed0?w=600&h=303&f=gif&s=1396033" alt></p>
+<p>首先，我们利用 create-react-app 来启动一个新的 React 项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app your-project-name</span><br></pre></td></tr></table></figure>
+
+<p>之后在项目中安装 react-sorting-hoc 以及 array-move，后者是用来实现数组移动。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> your-project-name</span><br><span class="line">yarn add react-sortable-hoc array-move</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-GIF-组件，添加样式和数据"><a href="#创建-GIF-组件，添加样式和数据" class="headerlink" title="创建 GIF 组件，添加样式和数据"></a>创建 GIF 组件，添加样式和数据</h2><p>为简单起见，我们将在 App.css 文件中编写所有样式。你可以使用以下内容对既有样式进行覆盖：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.App</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#1a1919</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">25px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.App</span> <span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">52px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.App</span> <span class="selector-tag">h2</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#f6c945</span>;</span><br><span class="line">  <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.App</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">  <span class="attribute">cursor</span>: grab;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">180px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">240px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，让我们使用 React 的 useState hook 来实现 GIF 组件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在src目录中创建一个 Gif.js 文件并写入以下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Gif = <span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">alt</span>=<span class="string">"gif"</span> /&gt;</span>)</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">Gif.propTypes = &#123;</span></span><br><span class="line"><span class="xml">  gif: PropTypes.string.isRequired,</span></span><br><span class="line"><span class="xml">&#125;;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">export default Gif;</span></span><br></pre></td></tr></table></figure>
+
+<p>编写代码时尽力遵循最佳实践，因此我们还导入 PropTypes 进行类型检查。之后将Gif 组件并将其添加到 App 中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./App.css'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Gif <span class="keyword">from</span> <span class="string">'./Gif'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [gifs, setGifs] = useState([<span class="string">'https://media.giphy.com/media/3ohhwoWSCtJzznXbuo/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/l46CbZ7KWEhN1oci4/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/3ohzgD1wRxpvpkDCSI/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/xT1XGYy9NPhWRPp4pq/giphy.gif'</span>,]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;Drag those GIFs around&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;h2&gt;Set 1&lt;/</span>h2&gt;</span><br><span class="line">        &#123;gifs.map(<span class="function">(<span class="params">gif,  i</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Gif</span> <span class="attr">key</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">gif</span>=<span class="string">&#123;gif&#125;</span> /&gt;</span>)&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>运行 <code>npm run start</code>，访问 <a href="http://localhost:3000/，可以看到如下结果" target="_blank" rel="noopener">http://localhost:3000/，可以看到如下结果</a></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/19/16ca87422ab5c40b?w=1277&h=657&f=webp&s=22272" alt></p>
+<h2 id="添加拖放功能"><a href="#添加拖放功能" class="headerlink" title="添加拖放功能"></a>添加拖放功能</h2><p>现在让我们对 Gif 组件添加拖拽功能。首先，我们需要了解 react-sortable-hoc 的两个 HOC，以及 array-move 的 <code>arrayMove</code> 方法，以便于在拖动发生修改数组。首先引入对应组件以及方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; sortableContainer, sortableElement &#125; <span class="keyword">from</span> <span class="string">'react-sortable-hoc'</span>;</span><br><span class="line"><span class="keyword">import</span> arrayMove <span class="keyword">from</span> <span class="string">'array-move'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>之前提到过 HOC，本质上<strong>高阶组件是参数为组件，返回值为新组件的函数。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> EnhancedComponent = higherOrderComponent(WrappedComponent);</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，HOC 就是在当前 component 的外层包裹我们所需要实现的功能。所以 <code>sortableContainer</code>，<code>sortableElement</code> 就是 <code>higherOrderComponent</code>。</p>
+<ul>
+<li><code>sortableContainer</code> 是所有可排序元素的容器；</li>
+<li><code>sortableElement</code>  是每个可渲染元素的容器。</li>
+</ul>
+<p>import 之后我们要做的是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SortableGifsContainer = sortableContainer(<span class="function">(<span class="params">&#123; children &#125;</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"gifs"</span>&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">const</span> SortableGif = sortableElement(<span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Gif</span> <span class="attr">key</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">gif</span>=<span class="string">&#123;gif&#125;</span> /&gt;</span>);</span></span><br></pre></td></tr></table></figure>
+
+<p> <code>SortableGif</code> 为每个子元素创建了一个容器，也就是为单个 Gif 组件创建。它们将使用在 <code>SortableGifsContainer</code> 中，以 <code>children</code> 属性传递进去</p>
+<blockquote>
+<p>注：您需要将每个子项在 div 或任何其他有效的 HTML 元素中。</p>
+</blockquote>
+<p>然后用新创建的 <code>SortableGif</code> 替换原有的 <code>Gif</code> 组件，并在 <code>SortableGifsContainer</code> 中使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;SortableGifsContainer axis=<span class="string">"x"</span> onSortEnd=&#123;onSortEnd&#125;&gt;</span><br><span class="line">  &#123;gifs.map(<span class="function">(<span class="params">gif, i</span>) =&gt;</span></span><br><span class="line">    &lt;SortableGif</span><br><span class="line">    <span class="comment">// don't forget to pass index prop with item index</span></span><br><span class="line">      index=&#123;i&#125;</span><br><span class="line">      key=&#123;gif&#125;</span><br><span class="line">      gif=&#123;gif&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">  )&#125;</span><br><span class="line">&lt;<span class="regexp">/SortableGifsContainer&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>请务必注意，您需要将 index prop传递给可排序元素，以便库可以区分每一个子项目。它类似于在 React 中向列表添加键。</p>
+</blockquote>
+<p>在 <code>SortableGifsContainer</code> 上，我们添加了 <code>axis=&quot;x&quot;</code>，是因为 Gif 组件是水平放置的，如果想要水平拖动它们就需要配置 <code>axis</code>，而默认是垂直拖动。换句话说， <code>axis=&quot;x&quot;</code> 限制子项目只能沿水平 x 轴拖放。同时，还添加了 <code>onSortEnd={onSortEnd}</code>，该函数在每次拖动或排序项目时触发。它的实现如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> onSortEnd = <span class="function">(<span class="params">&#123; oldIndex, newIndex &#125;</span>) =&gt;</span> setGifs(arrayMove(gifs, oldIndex, newIndex));</span><br></pre></td></tr></table></figure>
+
+<p><code>onSortEnd</code> 接收了一个被拖动的项目的新旧 <code>index</code>，当然，每次我们移动项目后，我们都会在arrayMove的帮助下修改数据。</p>
+<p>现在已经知道如何在项目中实现拖放！ 🎉🎉🎉</p>
+<h2 id="如果我们有多个项目列表怎么办？"><a href="#如果我们有多个项目列表怎么办？" class="headerlink" title="如果我们有多个项目列表怎么办？"></a>如果我们有多个项目列表怎么办？</h2><p>之前的例子是为了展示 <code>react-sortable-hoc</code> 的功能，所以非常的清晰以及简单。但是在实际的业务中，你可能会遇到多个项目列表都需要拖放的场景，那该怎么办？</p>
+<p>react-sortable-hoc 为我们提供了一个 <code>collection</code> prop  用来区分列表。在上一个例子的基础上，我们添加一个新的列表</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [newGifs, setNewGifs] = useState([</span><br><span class="line">  <span class="string">'https://media.giphy.com/media/xiOgHgY2ceKhm46cAj/giphy.gif'</span>,</span><br><span class="line">  <span class="string">'https://media.giphy.com/media/3oKIPuMqYfRsyJTWfu/giphy.gif'</span>,</span><br><span class="line">  <span class="string">'https://media.giphy.com/media/4ZgLPakqTajjVFOVqw/giphy.gif'</span>,</span><br><span class="line">  <span class="string">'https://media.giphy.com/media/3o7btXIelzs8nBnznG/giphy.gif'</span>,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<p>和之前一样，除了需要在 <code>SortableGif</code> 组件上添加 <code>collection</code> props 具体如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;<span class="built_in">Set</span> <span class="number">2</span>&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;SortableGifsContainer axis="x" onSortEnd=&#123;onSortEnd&#125;&gt;</span></span><br><span class="line"><span class="regexp">    &#123;newGifs.map((gif, i) =&gt; (</span></span><br><span class="line"><span class="regexp">        &lt;SortableGif</span></span><br><span class="line"><span class="regexp">            index=&#123;i&#125;</span></span><br><span class="line"><span class="regexp">            key=&#123;gif&#125;</span></span><br><span class="line"><span class="regexp">            gif=&#123;gif&#125;</span></span><br><span class="line"><span class="regexp">            collection="newGifs"</span></span><br><span class="line"><span class="regexp">		/</span>&gt;</span><br><span class="line">    ))&#125;</span><br><span class="line">&lt;<span class="regexp">/SortableGifsContainer&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在之前的第一个列表中也添加相应的 <code>collection</code> 属性，例如 <code>collection=&quot;gifs&quot;</code></p>
+<p>之后修改 <code>onSortEnd</code> 函数，它的参数中会多一个 <code>collection</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> onSortEnd = <span class="function">(<span class="params">&#123; oldIndex, newIndex, collection &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span>(collection) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'gifs'</span>:</span><br><span class="line">      setGifs(arrayMove(gifs, oldIndex, newIndex))</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'newGifs'</span>:</span><br><span class="line">      setNewGifs(arrayMove(newGifs, oldIndex, newIndex))</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们就可以自由的拖放了。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/8/19/16ca874fdbbf5863?w=600&h=303&f=gif&s=1396033" alt></p>
+<p>如图中所示，我们现在有两个单独的 GIF 列表，可以自由拖放。而且，它们是独立的意思，来自不同列表的项目不会混淆。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2503,7 +2748,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
