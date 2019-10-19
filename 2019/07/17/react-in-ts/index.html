@@ -495,7 +495,7 @@
 </li>
 <li><p>React.FC | React.Component的联合类型</p>
 <p><code>React.ComponentType&lt;P&gt;</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withState = &lt;P extends WrappedComponentProps&gt;(</span><br><span class="line">    WrappedComponent: React.ComponentType&lt;P&gt;,</span><br><span class="line">) =&gt; &#123; ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withState = <span class="xml"><span class="tag">&lt;<span class="name">P</span> <span class="attr">extends</span> <span class="attr">WrappedComponentProps</span>&gt;</span>(</span></span><br><span class="line">    WrappedComponent: React.ComponentType&lt;P&gt;,</span><br><span class="line">) =&gt; &#123; ...</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>React 要素</p>
 <p><code>React.ReactElement&lt;P&gt;</code> or <code>JSX.Element</code></p>
@@ -505,7 +505,7 @@
 <li><p>React Node</p>
 <p><code>React.ReactNode</code></p>
 <p>表示任何类型的React节点（基本上是ReactElement（包括Fragments和Portals）+ 原始JS类型 的合集）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> elementOrPrimitive: React.ReactNode = <span class="string">'string'</span> || <span class="number">0</span> || <span class="literal">false</span> || <span class="literal">null</span> || <span class="literal">undefined</span> || &lt;div /&gt; || &lt;MyComponent /&gt;;</span><br><span class="line">const Component = (&#123; children: React.ReactNode &#125;) =&gt; ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> elementOrPrimitive: React.ReactNode = <span class="string">'string'</span> || <span class="number">0</span> || <span class="literal">false</span> || <span class="literal">null</span> || <span class="literal">undefined</span> || <span class="xml"><span class="tag">&lt;<span class="name">div</span> /&gt;</span> || <span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">const Component = (&#123; children: React.ReactNode &#125;) =&gt; ...</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>React CSS属性</p>
 <p><code>React.CSSProperties</code></p>
@@ -714,7 +714,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -764,7 +764,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

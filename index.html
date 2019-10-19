@@ -350,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/ts-in-rollup/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/spread-operator-for-objects/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yzz">
@@ -370,7 +370,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/10/19/ts-in-rollup/" class="post-title-link" itemprop="url">ts-in-rollup</a>
+                <a href="/2019/10/19/spread-operator-for-objects/" class="post-title-link" itemprop="url">spread-operator-for-objects</a>
               
             
           </h1>
@@ -395,12 +395,31 @@
                 
               
 
-              <time title="创建时间：2019-10-19 18:42:01" itemprop="dateCreated datePublished" datetime="2019-10-19T18:42:01+08:00">2019-10-19</time>
+              <time title="创建时间：2019-10-19 18:50:14 / 修改时间：18:52:13" itemprop="dateCreated datePublished" datetime="2019-10-19T18:50:14+08:00">2019-10-19</time>
             </span>
           
 
           
+            
 
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -437,7 +456,290 @@
       
         
           
+            <blockquote>
+<p>今天看到了<a href="https://juejin.im/post/5c340756e51d45523070f877" target="_blank" rel="noopener">你必须收藏的 ES6 语法密糖 - Spread Operator 技巧</a>，这篇文章，收获很多，同时也想起来<br><code>...</code> 也有一些操作对象的用法，总结了一下。</p>
+</blockquote>
+<p>在 ECMAScript 2018 中 Spread Operator 增加了对对象的支持，使得它的应用更为广泛，本文重点介绍如何将它与 Object 一起使用以及与 <code>Object.assgin</code> 的区别。</p>
+<p>可以通过<a href="https://babeljs.io/repl" target="_blank" rel="noopener">BABEL</a>，查看示例代码 babel 编译后的结果。</p>
+<h5 id="解构赋值"><a href="#解构赋值" class="headerlink" title="...  解构赋值"></a><code>...</code>  解构赋值</h5><p>除去已经声明的属性，<strong>剩余</strong>的所有属性都会赋给 <code>...</code> 后的属性名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; x, ...y &#125; = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span>, <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// &#123;y: 2, a: 3, b: 4&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="删除属性值"><a href="#删除属性值" class="headerlink" title="... 删除属性值"></a><code>...</code> 删除属性值</h5><p>利用 <code>...</code> 来删除对象中的某一个属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; <span class="attr">x</span>: deleted, ...y &#125; = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span>, <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(y); <span class="comment">// &#123;y: 2, a: 3, b: 4&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="复制对象"><a href="#复制对象" class="headerlink" title="...  复制对象"></a><code>...</code>  复制对象</h5><p>在 JavaScript 中，有一个常见赋值语法如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cat = &#123; <span class="attr">age</span>: <span class="number">4</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> kitten = cat;</span><br><span class="line">kitten.age = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此时，  <code>cat</code> 和 <code>kitten</code> 引用同一个对象，如果修改了 <code>kitten</code> 的属性，相应的 <code>cat</code> 也会发生变化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(kitten.age); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.age); <span class="comment">// 1 &lt;-- problem!</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 Spread Operator 可以轻松地创建一个具有现有对象的所有相同属性的新对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cat = &#123; <span class="attr">age</span>: <span class="number">4</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> kitten = &#123; ...cat &#125;; <span class="comment">// &lt;-- changed</span></span><br><span class="line">kitten.age = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(kitten.age); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.age); <span class="comment">// 4 &lt;-- fixed!</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>但是</strong>，利用 Spread Operator 去赋值对象，只能完成<strong>浅复制</strong>，也就是说利用 <code>...</code> 去复制对象时，并不能递归地复制所有层级。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cat = &#123; <span class="attr">age</span>: <span class="number">4</span>, <span class="attr">toys</span>: [<span class="string">"mouse"</span>, <span class="string">"catnip"</span>] &#125;;</span><br><span class="line"><span class="keyword">const</span> kitten = &#123; ...cat &#125;;</span><br><span class="line"><span class="comment">// const kitten = Object.assign(&#123;&#125;, cat); &lt;-- same result</span></span><br><span class="line">kitten.toys[<span class="number">1</span>] = <span class="string">"yarn"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(kitten.toys); <span class="comment">// ["mouse", "yarn"]</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.toys); <span class="comment">// ["mouse", "yarn"] &lt;-- problem!</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="扩展对象"><a href="#扩展对象" class="headerlink" title="...  扩展对象"></a><code>...</code>  扩展对象</h5><p>利用 <code>...</code> 来拓展对象，就是将<strong>新属性</strong>添加到使用 Spread Operator 创建的对象上</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cat = &#123; <span class="attr">legs</span>: <span class="number">4</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">    ...cat,</span><br><span class="line">    sound: <span class="string">"woof"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(cat); <span class="comment">// &#123; legs: 4 &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(dog); <span class="comment">// &#123; legs: 4, sound: "woof" &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>同样，可以看到 <code>cat</code> 对象未被更改，但新 <code>dog</code> 对象具有来自 <code>cat</code> 的 <code>legs</code> 属性以及新  <code>sound</code> 属性，如果<code>sound</code> 已经存在的话，则会覆盖。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cat = &#123; <span class="attr">legs</span>: <span class="number">4</span>, <span class="attr">sound</span>: <span class="string">"meow"</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">    ...cat,</span><br><span class="line">    sound: <span class="string">"woof"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(cat); <span class="comment">// &#123; legs: 4, sound: "meow" &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(dog); <span class="comment">// &#123; legs: 4, sound: "woof" &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>但是</strong>，使用 <code>...</code> 拓展对象时，要注意<strong>行顺序</strong>，也就是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cat = &#123; <span class="attr">legs</span>: <span class="number">4</span>, <span class="attr">sound</span>: <span class="string">"meow"</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">    sound: <span class="string">"woof"</span>,</span><br><span class="line">    ...cat</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(cat); <span class="comment">// &#123; legs: 4, sound: "meow" &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(dog); <span class="comment">// &#123; legs: 4, sound: "meow" &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述 <code>...cat</code> 将 <code>sound: &quot;woof&quot;</code> 改写为 <code>sound: &quot;meow&quot;</code>。</p>
+<h5 id="与-Object-assign-的区别"><a href="#与-Object-assign-的区别" class="headerlink" title="... 与 Object.assign 的区别"></a><code>...</code> 与 <code>Object.assign</code> 的区别</h5><p>在上述利用 <code>...</code> 处理对象的过程中，会发现 <code>...</code> 有些时候与 <code>Object.assgin</code> 的操作近乎与等价的，那么他们具体的区别是什么。</p>
+<p><code>...</code> 和 <code>Object.assign()</code> 整体的用法非常下关系，主要区别在于 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener"><code>Object.assign()</code></a> 函数会触发 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/set" target="_blank" rel="noopener">setters</a>，而 <code>...</code> 语法则不会，也就是说 <code>...</code> 是定义了新属性，而 <code>Object.assign()</code> 则是设置了它们。</p>
+<h4 id="Object-assign-的基本用法"><a href="#Object-assign-的基本用法" class="headerlink" title="Object.assign() 的基本用法"></a><code>Object.assign()</code> 的基本用法</h4><ul>
+<li><p>改变原有对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(target, source1, source2);</span><br></pre></td></tr></table></figure>
+
+<p><code>target</code> 已经被修改，<code>source1</code> 以及 <code>source2</code> 会被复制到其中。</p>
+</li>
+<li><p>创建新的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = <span class="built_in">Object</span>.assign(&#123;&#125;, source1, source2);</span><br></pre></td></tr></table></figure>
+
+<p><code>result</code> 是一个新的对象，<code>source1</code> 以及 <code>source2</code> 被复制到其中。</p>
+</li>
+</ul>
+<p>在第二种方法上，<code>...</code> 与 <code>Object.assign()</code> 是非常类似的。接下来，阐述它们之间具体的相似点和不同点。</p>
+<h4 id="Object-assign-与-的相同点"><a href="#Object-assign-与-的相同点" class="headerlink" title="Object.assign 与 ... 的相同点"></a><code>Object.assign</code> 与 <code>...</code> 的相同点</h4><ul>
+<li><p><code>...</code> 和 <code>Object.assign()</code> 都是通过 <code>get</code> 运算符来取值</p>
+<p>在将它们写入目标之前，这两个操作都会使用 <code>get</code> 操作从源对象读取相应的属性值。因此，在此过程中，<code>getter</code> 将转换为正常的数据属性，具体如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> original = &#123;</span><br><span class="line">    <span class="keyword">get</span> foo() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'getter'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">123</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>original</code> 对象有 <code>getter foo</code>，而 <code>setter</code> 为 <code>undeined</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(original, <span class="string">'foo'</span>)</span><br><span class="line"><span class="comment">/* log</span></span><br><span class="line"><span class="comment">&#123; </span></span><br><span class="line"><span class="comment">    get: [Function: foo],</span></span><br><span class="line"><span class="comment">  	set: undefined,</span></span><br><span class="line"><span class="comment">  	enumerable: true,</span></span><br><span class="line"><span class="comment">  	configurable: true </span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，利用 <code>Object.assgin()</code> 以及 <code>...</code> 对 <code>original</code> 对象进行克隆时，会发现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> clone1 = &#123;...original&#125;;</span><br><span class="line"><span class="comment">// 触发 original 的 getter 会 log "getter"</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(clone1, <span class="string">'foo'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* log getter 以及被转换为正常的数据属性</span></span><br><span class="line"><span class="comment">&#123; </span></span><br><span class="line"><span class="comment">	value: 123,</span></span><br><span class="line"><span class="comment">  	writable: true,</span></span><br><span class="line"><span class="comment">  	enumerable: true,</span></span><br><span class="line"><span class="comment">  	configurable: true </span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> clone2 = <span class="built_in">Object</span>.assign(&#123;&#125;, original);</span><br><span class="line"><span class="comment">// 触发 original 的 getter 会 log "getter"</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(clone2, <span class="string">'foo'</span>)</span><br><span class="line">&#123; </span><br><span class="line">	value: <span class="number">123</span>,</span><br><span class="line">  	writable: <span class="literal">true</span>,</span><br><span class="line">  	enumerable: <span class="literal">true</span>,</span><br><span class="line">  	configurable: <span class="literal">true</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述结果表明，在得到的 <code>clone1</code> 和 <code>clone2</code>中，<code>foo</code> 只是一个普通的数据属性（它的属性描述符具有属性值和可写）；</p>
+</li>
+<li><p><code>...</code> 和 <code>Object.assign</code> 只会处理可枚举数据</p>
+<p>这两个操作都会忽略所有继承的属性和所有不可枚举的属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proto = &#123;</span><br><span class="line">    inheritedEnumerable: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> obj = <span class="built_in">Object</span>.create(proto, &#123;</span><br><span class="line">    ownEnumerable: &#123;</span><br><span class="line">        value: <span class="number">2</span>,</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    ownNonEnumerable: &#123;</span><br><span class="line">        value: <span class="number">3</span>,</span><br><span class="line">        enumerable: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"><span class="comment">// &#123; ownEnumerable: 2, ownNonEnumerable: 3, __proto__: &#123; inheritedEnumerable: 1 &#125; &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123; ...obj &#125;);</span><br><span class="line"><span class="comment">// &#123; ownEnumerable: 2 &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.assign(&#123;&#125;, obj));</span><br><span class="line"><span class="comment">// &#123; ownEnumerable: 2 &#125;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Object-assign-与-的不同点"><a href="#Object-assign-与-的不同点" class="headerlink" title="Object.assign 与 ... 的不同点"></a><code>Object.assign</code> 与 <code>...</code> 的不同点</h4><p>  它们的不同点在于 <code>...</code> 会定义属性，而 <code>Object.assign()</code>  会设置它们，也就是说 <code>...</code> 定义了目标对象中的新属性，<code>Object.assign()</code> 则是使用 <code>set</code> 操作符进行写入。</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">Object</span>.prototype, <span class="string">'foo'</span>, &#123;</span><br><span class="line">    <span class="keyword">set</span>(value) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'SET'</span>, value);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> obj = &#123;<span class="attr">foo</span>: <span class="number">123</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.assign(&#123;&#125;, obj));</span><br><span class="line"><span class="comment">// 会触发 set, log SET 123</span></span><br><span class="line"><span class="comment">// log &#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123; ...obj &#125;);</span><br><span class="line"><span class="comment">// log &#123; foo: 123 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><ul>
+<li><a href="https://juejin.im/post/5c340756e51d45523070f877" target="_blank" rel="noopener">https://juejin.im/post/5c340756e51d45523070f877</a></li>
+<li><a href="https://lucybain.com/blog/2018/js-es6-spread-operator/" target="_blank" rel="noopener">https://lucybain.com/blog/2018/js-es6-spread-operator/</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax</a></li>
+<li><a href="http://2ality.com/2016/10/rest-spread-properties.html" target="_blank" rel="noopener">http://2ality.com/2016/10/rest-spread-properties.html</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/ts-in-rollup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/19/ts-in-rollup/" class="post-title-link" itemprop="url">利用 gulp 解决 rollup 中 typescript 与 babel 冲突</a>
+              
             
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-19 18:42:01 / 修改时间：18:48:50" itemprop="dateCreated datePublished" datetime="2019-10-19T18:42:01+08:00">2019-10-19</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>最近在用 lerna 重构一个项目，其中一个 package 是使用 rollup 作为脚手架的，需要使用 ts 对其进行重写，但是发现在使用 rollup 时，ts 只能被编译为 js，而之后却不能用 babel 编译为 es3.</p>
+</blockquote>
+<p>首先明确 rollup 需要处理的任务流为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typescript = (rollup-plugin-typescript2) </span><br><span class="line">    	   =&gt; ES5 = (babel) </span><br><span class="line">           =&gt; ES3</span><br></pre></td></tr></table></figure>
+
+<p>但是第一步、二步冲突，故采用 gulp 将上述任务拆分。</p>
+<h2 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h2><p>首先创建 rollup-repo 项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir rollup-repo &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br></pre></td></tr></table></figure>
+
+<p>安装 gulp 两个工具在项目内</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化项目</span></span><br><span class="line">npm init</span><br><span class="line"><span class="comment"># 安装 gulp</span></span><br><span class="line">npm install --save-dev gulp</span><br></pre></td></tr></table></figure>
+
+<p>然后创建 gulpfile.js 脚本用于后续运行，并在文件中输入以下代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log (<span class="string">'build'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>同时在 package.json 中添加 <code>script</code>，并在终端中输入 <code>npm run build</code>，看是否打印出 <code>build</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "build": "gulp build",</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入-rollup"><a href="#引入-rollup" class="headerlink" title="引入 rollup"></a>引入 rollup</h2><p>在项目中安装 rollup 用于打包 typescript</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 rollup</span></span><br><span class="line">npm install --save-dev rollup</span><br></pre></td></tr></table></figure>
+
+<p>首先解决之前的第一个问题 typescript 转 ES2015</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rollup-plugin-tslint 用于检测 typescript</span></span><br><span class="line">npm install --save-dev rollup-plugin-tslint</span><br><span class="line"><span class="comment"># rollup-plugin-typescript2 用于将 ts 编译为 js</span></span><br><span class="line">npm install --save-dev rollup-plugin-typescript2</span><br></pre></td></tr></table></figure>
+
+<p>将 rollup 处理 typescript 作为 gulp 的一个 task，使用 ./temp/index.js 作为中转的文件。更新 gulpfile.js 的内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在终端中运行命令 <code>npm run build</code>，此时发现在 tempFile 中，typescript 已经被编译为 ES2015 的代码，之后需要我们将它转换为 ES3</p>
+<p>引入 gulp-babel 来处理这个任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure>
+
+<p>之后就是 gulp 很明显的 pipe 方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span> (<span class="string">'gulp-babel'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>利用 <code>babel</code> 将 temp.js 中 ES2015 的代码编译为 ES3</p>
+<p>至此，任务已经初步完成了，后续需要我们将 temp.js 删除并 uglyfly 代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clean file</span></span><br><span class="line">npm install --save-dev gulp-clean</span><br><span class="line"><span class="comment"># uglyfly file</span></span><br><span class="line">npm install --save-dev gulp-uglyfly</span><br></pre></td></tr></table></figure>
+
+<p>引入两个插件来完成细化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (clean ())</span><br><span class="line">    .pipe (uglyfly ())</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这个脚手架的配置中主要是想利用 rollup 强大的 tree-shaking 功能，故将其结合在其中，可能会有更好的方法。</p>
+
           
         
       
@@ -555,7 +857,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-19 18:43:00" itemprop="dateModified" datetime="2019-10-19T18:43:00+08:00">2019-10-19</time>
+                <time title="修改时间：2019-10-19 18:48:57" itemprop="dateModified" datetime="2019-10-19T18:48:57+08:00">2019-10-19</time>
               </span>
             
           
@@ -569,7 +871,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
 
                 
                 
@@ -611,49 +913,53 @@
       
         
           
-            <blockquote>
-<p>最近在用 lerna 重构一个项目，其中一个 package 是使用 rollup 作为脚手架的，需要使用 ts 对其进行重写，但是发现在使用 rollup 时，ts 只能被编译为 js，而之后却不能用 babel 编译为 es3.</p>
+            <h2 id="lt-link-gt-只能在-lt-head-gt-中插入么？"><a href="#lt-link-gt-只能在-lt-head-gt-中插入么？" class="headerlink" title="&lt;link /&gt; 只能在 &lt;head /&gt; 中插入么？"></a><code>&lt;link /&gt;</code> 只能在 <code>&lt;head /&gt;</code> 中插入么？</h2><p>不是。在某些情况下 <code>&lt;link /&gt;</code> 也能插入到 <code>&lt;body /&gt;</code> 中，具体情况取决于当前 <code>&lt;link /&gt;</code> 是否有一个 <strong>body-ok</strong> 的链接类型。例如，在日常开发中，会使用 </p>
+<ul>
+<li><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;main.css&quot; /&gt;</code> 来链接<strong>样式表</strong>；</li>
+<li><code>&lt;link rel=&quot;icon&quot; href=&quot;favicon.ico&quot; /&gt;</code> 来链接<strong>网站的图标</strong>。</li>
+</ul>
+<p>但是只有 <strong>stylesheet</strong> 类型才是 <strong>body-ok</strong> 可以插入到 <code>&lt;body /&gt;</code> 中，其他类型见 <a href="https://html.spec.whatwg.org/multipage/links.html#body-ok" target="_blank" rel="noopener">HTML Standard</a>。</p>
+<p><del>我们可以这么使用</del>（极其不推荐）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// index.html</span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./styles/head.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- demo 1 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./styles/body.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 此时 body.css 会覆盖 .head.css --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是这不是一种好的可遵循的实践方式；更合理的方式是，将你的 <code>&lt;link&gt;</code> 元素从你的 body 内容中分离出来，将其放在 <code>&lt;head&gt;</code> 中。</p>
+<h2 id="lt-link-gt-标签的-media-属性"><a href="#lt-link-gt-标签的-media-属性" class="headerlink" title="&lt;link /&gt; 标签的 media 属性"></a><code>&lt;link /&gt;</code> 标签的 <code>media</code> 属性</h2><p>在日常开发中，有时候会碰到需要媒体查询的情况，例如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// screen width 从 600px 到 900px 时，样式生效  </span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">900px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.title</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// screen width 从 0 到 600px 时，样式生效  </span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">600px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.title</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>业务不复杂的情况，可以选择这样实现，但是当样式很多时，会造成当前样式表复杂且不不清晰。我们可以借助 <code>&lt;link rel=&quot;stylesheet&quot; media=&quot;(max-width: 600px)&quot; href=&quot;example.css&quot; /&gt;</code> 来分离样式，这个属性规定了外部资源适用的媒体类型。</p>
+<h2 id="lt-link-gt-的-disabled-属性"><a href="#lt-link-gt-的-disabled-属性" class="headerlink" title="&lt;link /&gt; 的 disabled 属性"></a><code>&lt;link /&gt;</code> 的 <code>disabled</code> 属性</h2><p>常用于启用或禁用样式表，例如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'link[href="red.css"]'</span>).disabled = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可以使得 <code>red.css</code> 失效，一般可以配合 <code>&lt;link /&gt;</code> 的 <code>title</code>、<code>rel</code> 来实现网站换肤功能，具体见</p>
+<blockquote>
+<p>利用 disabled 实现网站换肤 <a href="https://www.zhangxinxu.com/wordpress/2019/02/link-rel-alternate-website-skin/" target="_blank" rel="noopener">link rel=alternate网站换肤功能最佳实现</a>.</p>
 </blockquote>
-<p>首先明确 rollup 需要处理的任务流为</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typescript = (rollup-plugin-typescript2) </span><br><span class="line">    	   =&gt; ES5 = (babel) </span><br><span class="line">           =&gt; ES3</span><br></pre></td></tr></table></figure>
+<h2 id="利用-lt-link-gt-标签完成游览器预加载机制"><a href="#利用-lt-link-gt-标签完成游览器预加载机制" class="headerlink" title="利用 &lt;link /&gt; 标签完成游览器预加载机制"></a>利用 <code>&lt;link /&gt;</code> 标签完成游览器预加载机制</h2><p>在优化页面的首屏的时候，首先要做的就是<strong>限制首次请求的资源大小以及资源数</strong>，但是这样会使得每次跳转至一个未缓存资源的页面时，都需要重新加载。如果在页面加载时候可以满足</p>
+<ul>
+<li>首屏需要的资源作为即刻资源，希望在页面加载的早期就开始获取，在浏览器的主渲染机制介入前就进行预加载；</li>
+<li>当首屏加载完成之后，在加载其他页面的资源，这样既不占有首屏的时间，也可以优化其他页面。</li>
+</ul>
+<p><code>&lt;link /&gt;</code> 标签的 <code>rel</code> 的属性值 <code>preload</code> 就可以实现这一功能，来指明哪些资源是在页面加载完成后即刻需要的。为了完成基本的配置，你还需要通过 <code>href</code>和<code>as</code> 属性指定需要被预加载资源的资源路径及其类型，具体实例</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"preload"</span> <span class="attr">href</span>=<span class="string">"style.css"</span> <span class="attr">as</span>=<span class="string">"style"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"preload"</span> <span class="attr">href</span>=<span class="string">"main.js"</span> <span class="attr">as</span>=<span class="string">"script"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- hello world 代码片段 * 2048 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>但是第一步、二步冲突，故采用 gulp 将上述任务拆分。</p>
-<h2 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h2><p>首先创建 rollup-repo 项目</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir rollup-repo &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br></pre></td></tr></table></figure>
+<p>在使用预加载时候，waterfall 如下</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/30/16d817a804296738?w=591&h=170&f=png&s=22354" alt></p>
+<p>在不使用预加载的时候</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/30/16d817ae8930811d?w=655&h=177&f=png&s=23083" alt></p>
+<p>从图中很明显可以看出 main.js 的加载实际又很明显的分别，也就是预加载的好处。也就实现了，我们对首屏资    源的预加载，而其他资源的加载时机，我们可以通过脚本化来控制，通过新建 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLLinkElement" target="_blank" rel="noopener"><code>HTMLLinkElement</code></a> 元素来实现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当首页完成的时候</span></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 完成对其他资源的预加载</span></span><br><span class="line">	<span class="keyword">var</span> preloadLink = <span class="built_in">document</span>.createElement(<span class="string">"link"</span>);</span><br><span class="line">  preloadLink.href = <span class="string">"myscript.js"</span>;</span><br><span class="line">  preloadLink.rel = <span class="string">"preload"</span>;</span><br><span class="line">  preloadLink.as = <span class="string">"script"</span>;</span><br><span class="line">  <span class="built_in">document</span>.head.appendChild(preloadLink);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>安装 gulp 两个工具在项目内</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化项目</span></span><br><span class="line">npm init</span><br><span class="line"><span class="comment"># 安装 gulp</span></span><br><span class="line">npm install --save-dev gulp</span><br></pre></td></tr></table></figure>
+<h2 id="lt-link-gt-的-onload-事件"><a href="#lt-link-gt-的-onload-事件" class="headerlink" title="&lt;link /&gt; 的 onload 事件"></a><code>&lt;link /&gt;</code> 的 onload 事件</h2><p>与 <code>window.onload</code> 事件一样，它赋予了我们监听样式表加载完成的（但是还未应用到内容），也可以通过 error 来监听是否在加载期间发生了异常。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">sheetLoaded</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// Do something interesting; the sheet has been loaded</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">sheetError</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  alert(<span class="string">"An error occurred loading the stylesheet!"</span>);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"mystylesheet.css"</span> <span class="attr">onload</span>=<span class="string">"sheetLoaded()"</span> <span class="attr">onerror</span>=<span class="string">"sheetError()"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>然后创建 gulpfile.js 脚本用于后续运行，并在文件中输入以下代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log (<span class="string">'build'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>同时在 package.json 中添加 <code>script</code>，并在终端中输入 <code>npm run build</code>，看是否打印出 <code>build</code></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "build": "gulp build",</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<h2 id="引入-rollup"><a href="#引入-rollup" class="headerlink" title="引入 rollup"></a>引入 rollup</h2><p>在项目中安装 rollup 用于打包 typescript</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 rollup</span></span><br><span class="line">npm install --save-dev rollup</span><br></pre></td></tr></table></figure>
-
-<p>首先解决之前的第一个问题 typescript 转 ES2015</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rollup-plugin-tslint 用于检测 typescript</span></span><br><span class="line">npm install --save-dev rollup-plugin-tslint</span><br><span class="line"><span class="comment"># rollup-plugin-typescript2 用于将 ts 编译为 js</span></span><br><span class="line">npm install --save-dev rollup-plugin-typescript2</span><br></pre></td></tr></table></figure>
-
-<p>将 rollup 处理 typescript 作为 gulp 的一个 task，使用 ./temp/index.js 作为中转的文件。更新 gulpfile.js 的内容如下</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>在终端中运行命令 <code>npm run build</code>，此时发现在 tempFile 中，typescript 已经被编译为 ES2015 的代码，之后需要我们将它转换为 ES3</p>
-<p>引入 gulp-babel 来处理这个任务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure>
-
-<p>之后就是 gulp 很明显的 pipe 方式</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span> (<span class="string">'gulp-babel'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>利用 <code>babel</code> 将 temp.js 中 ES2015 的代码编译为 ES3</p>
-<p>至此，任务已经初步完成了，后续需要我们将 temp.js 删除并 uglyfly 代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clean file</span></span><br><span class="line">npm install --save-dev gulp-clean</span><br><span class="line"><span class="comment"># uglyfly file</span></span><br><span class="line">npm install --save-dev gulp-uglyfly</span><br></pre></td></tr></table></figure>
-
-<p>引入两个插件来完成细化</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (clean ())</span><br><span class="line">    .pipe (uglyfly ())</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br></pre></td></tr></table></figure>
-
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这个脚手架的配置中主要是想利用 rollup 强大的 tree-shaking 功能，故将其结合在其中，可能会有更好的方法。</p>
+<ul>
+<li><p>参考来源</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2019/02/link-rel-alternate-website-skin/" target="_blank" rel="noopener">https://www.zhangxinxu.com/wordpress/2019/02/link-rel-alternate-website-skin/</a></li>
+</ul>
+</li>
+</ul>
 
           
         
@@ -849,10 +1155,10 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br></pre></td></tr></table></figure>
 
 <p>在src目录中创建一个 Gif.js 文件并写入以下代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Gif = <span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> (&lt;img src=&#123;gif&#125; alt="gif" /&gt;)</span><br><span class="line"></span><br><span class="line">Gif.propTypes = &#123;</span><br><span class="line">  gif: PropTypes.string.isRequired,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default Gif;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Gif = <span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">alt</span>=<span class="string">"gif"</span> /&gt;</span>)</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">Gif.propTypes = &#123;</span></span><br><span class="line"><span class="xml">  gif: PropTypes.string.isRequired,</span></span><br><span class="line"><span class="xml">&#125;;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">export default Gif;</span></span><br></pre></td></tr></table></figure>
 
 <p>编写代码时尽力遵循最佳实践，因此我们还导入 PropTypes 进行类型检查。之后将Gif 组件并将其添加到 App 中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./App.css'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Gif <span class="keyword">from</span> <span class="string">'./Gif'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [gifs, setGifs] = useState([<span class="string">'https://media.giphy.com/media/3ohhwoWSCtJzznXbuo/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/l46CbZ7KWEhN1oci4/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/3ohzgD1wRxpvpkDCSI/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/xT1XGYy9NPhWRPp4pq/giphy.gif'</span>,]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;Drag those GIFs around&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;h2&gt;Set 1&lt;/</span>h2&gt;</span><br><span class="line">        &#123;gifs.map(<span class="function">(<span class="params">gif,  i</span>) =&gt;</span> &lt;Gif key=&#123;gif&#125; gif=&#123;gif&#125; /&gt;)&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./App.css'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Gif <span class="keyword">from</span> <span class="string">'./Gif'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [gifs, setGifs] = useState([<span class="string">'https://media.giphy.com/media/3ohhwoWSCtJzznXbuo/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/l46CbZ7KWEhN1oci4/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/3ohzgD1wRxpvpkDCSI/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/xT1XGYy9NPhWRPp4pq/giphy.gif'</span>,]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;Drag those GIFs around&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;h2&gt;Set 1&lt;/</span>h2&gt;</span><br><span class="line">        &#123;gifs.map(<span class="function">(<span class="params">gif,  i</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Gif</span> <span class="attr">key</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">gif</span>=<span class="string">&#123;gif&#125;</span> /&gt;</span>)&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
 
 <p>运行 <code>npm run start</code>，访问 <a href="http://localhost:3000/，可以看到如下结果" target="_blank" rel="noopener">http://localhost:3000/，可以看到如下结果</a></p>
 <p><img src="http://fatge.xyz/static/img/drag-example-2.webp" alt></p>
@@ -868,7 +1174,7 @@
 <li><code>sortableElement</code>  是每个可渲染元素的容器。</li>
 </ul>
 <p>import 之后我们要做的是</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SortableGifsContainer = sortableContainer(<span class="function">(<span class="params">&#123; children &#125;</span>) =&gt;</span> &lt;div className="gifs"&gt;&#123;children&#125;&lt;/div&gt;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SortableGif = sortableElement(<span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> &lt;Gif key=&#123;gif&#125; gif=&#123;gif&#125; /&gt;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SortableGifsContainer = sortableContainer(<span class="function">(<span class="params">&#123; children &#125;</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"gifs"</span>&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SortableGif = sortableElement(<span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Gif</span> <span class="attr">key</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">gif</span>=<span class="string">&#123;gif&#125;</span> /&gt;</span>);</span></span><br></pre></td></tr></table></figure>
 
 <p> <code>SortableGif</code> 为每个子元素创建了一个容器，也就是为单个 Gif 组件创建。它们将使用在 <code>SortableGifsContainer</code> 中，以 <code>children</code> 属性传递进去</p>
 <blockquote>
@@ -1993,7 +2299,7 @@
 
 <p><strong>注意：</strong> componentDidCatch 仅会捕获渲染/生命周期方法中的错误。 如果在单击处理程序中引发错误，则不会捕获它。</p>
 <p>通常只在特殊的地方使用错误边界组件的 componentDidCatch。 这些组件包装子树的唯一目的是捕获和记录错误。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">errorMessage</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">  <span class="keyword">static</span> getDerivedStateFromError(error) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">errorMessage</span>: error.message &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidCatch(error, info) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error, info);</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.errorMessage) &#123;</span><br><span class="line">      <span class="keyword">return</span> &lt;h1&gt;Oops! &#123;this.state.errorMessage&#125;&lt;/h1&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">errorMessage</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">  <span class="keyword">static</span> getDerivedStateFromError(error) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">errorMessage</span>: error.message &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidCatch(error, info) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error, info);</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.errorMessage) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Oops! &#123;this.state.errorMessage&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>总结：</strong> 捕获、打印出错误信息。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上是React v16的生命周期钩子所适用的场景和具体使用方法。</p>
@@ -2553,233 +2859,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/understand-async-programming/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yzz">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yzz的神秘商店💪">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/18/understand-async-programming/" class="post-title-link" itemprop="url">深入理解异步编程的原理</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-18 09:56:51" itemprop="dateCreated datePublished" datetime="2019-07-18T09:56:51+08:00">2019-07-18</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-04 16:38:59" itemprop="dateModified" datetime="2019-08-04T16:38:59+08:00">2019-08-04</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>异步的高性能为 Node 带来了高度的赞誉，而异步编程也为其带来了部分的诋毁。</p>
-</blockquote>
-<p>异步编程从早期的 callback、事件发布\订阅模式到 ES6 的 Promise、Generator 在到 ES2017 中 async，看似风格迥异，但是还是有一条暗线将它们串联在一起的，就是希望将异步编程的代码表达尽量地贴合自然语言的线性思维。</p>
-<p>以这条暗线将上述几种解决方案连在一起，就可以更好地理解异步编程的原理、魅力。</p>
-<p>├── 事件发布\订阅模式 &lt;= Callback</p>
-<p>├── Promise &lt;= 事件发布\订阅模式</p>
-<p>├── Async、Await &lt;= Promise、Generator </p>
-<h3 id="事件发布-订阅模式-lt-Callback"><a href="#事件发布-订阅模式-lt-Callback" class="headerlink" title="事件发布\订阅模式 &lt;= Callback"></a>事件发布\订阅模式 &lt;= Callback</h3><p>这个模式本质上就是回调函数的事件化。它本身并无同步、异步调用的问题，我们只是使用它来实现事件与回调函数之间的关联。比较典型的有 NodeJS 的 events 模块</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; EventEmitter &#125; = <span class="built_in">require</span>(<span class="string">'events'</span>)</span><br><span class="line"><span class="keyword">const</span> eventEmitter = <span class="keyword">new</span> EventEmitter()</span><br><span class="line"><span class="comment">// 订阅</span></span><br><span class="line">eventEmitter.on(<span class="string">"event"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"event"</span>, msg)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 发布</span></span><br><span class="line">eventEmitter.emit(<span class="string">"event"</span>, <span class="string">"Hello world"</span>)</span><br></pre></td></tr></table></figure>
-
-<p>那么这种模式是如何与 Callback 关联的呢？我们可以利用 Javascript 简单实现 EventEmitter，答案就显而易见了。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">usrEventEmitter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span> () &#123;</span><br><span class="line">        <span class="keyword">this</span>.listeners = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 订阅，callback 为每个 event 的侦听器</span></span><br><span class="line">    on(eventName, callback) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.listeners[eventName]) <span class="keyword">this</span>.listeners[eventName] = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.listeners[eventName].push(callback)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 发布</span></span><br><span class="line">    emit(eventName, params) &#123;</span><br><span class="line">        <span class="keyword">this</span>.listeners[eventName].forEach(<span class="function"><span class="params">callback</span> =&gt;</span> &#123;</span><br><span class="line">            callback(params)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 注销</span></span><br><span class="line">    off(eventName, callback) &#123;</span><br><span class="line">        <span class="keyword">const</span> rest = <span class="keyword">this</span>.listeners[eventName].fitler(<span class="function"><span class="params">elem</span> =&gt;</span> elem !== callback)</span><br><span class="line">        <span class="keyword">this</span>.listeners[eventName] = rest</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 订阅一次</span></span><br><span class="line">    once(eventName, callback) &#123;</span><br><span class="line">        <span class="keyword">const</span> handler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            callback()</span><br><span class="line">            <span class="keyword">this</span>.off(eventName, handler)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.on(eventName, handler)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>上述实现忽略了很多细节，例如异常处理、多参数传递等。只是为了展示事件订阅\发布模式。</p>
-</blockquote>
-<p>很明显的看出，我们使用这种设计模式对异步编程做了逻辑上的分离，将其语义化为</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一些事件可能会被触发</span></span><br><span class="line">eventEmitter.on</span><br><span class="line"><span class="comment">// 当它发生的时候，要这样处理</span></span><br><span class="line">eventEmitter.emit</span><br></pre></td></tr></table></figure>
-
-<p>也就是说，我们将最初的 Callback 变成了事件监听器，从而优雅地解决异步编程。</p>
-<h3 id="Promise-lt-事件发布-订阅模式"><a href="#Promise-lt-事件发布-订阅模式" class="headerlink" title="Promise &lt;= 事件发布\订阅模式"></a>Promise &lt;= 事件发布\订阅模式</h3><p>使用事件发布\订阅模式时，需要我们事先严谨地设置目标，也就是上面所说的，必须要缜密地设定好有哪些事件会发生。这与我们语言的线性思维很违和。那么有没有一种方式可以解决这个问题，社区产出了 Promise。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            resolve(<span class="string">'hello world'</span>)</span><br><span class="line">        &#125;, <span class="number">500</span>)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">        reject(error)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 语义就变为先发生一些异步行为，then 我们应该这么处理</span></span><br><span class="line">promise.then(<span class="function"><span class="params">msg</span> =&gt;</span> <span class="built_in">console</span>.log(msg)).catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'err'</span>, error))</span><br></pre></td></tr></table></figure>
-
-<p>那么这种 Promise 与事件发布\订阅模式有什么联系呢？我们可以利用 EventEmitter 来实现 Promise，这样可能会对你有所启发。</p>
-<p>我们可以将 Promise 视为一个 EventEmitter，它包含了 <code>{ state: &#39;pending&#39; }</code> 来描述当前的状态，同时侦听它的变化</p>
-<ul>
-<li>当成功时 <code>{ state: &#39;fulfilled&#39; }</code>，要做些什么  <code>on(&#39;resolve&#39;, callback)</code>；</li>
-<li>当失败时 <code>{ state: &#39;rejected&#39; }</code>，要做些什么 <code>on(&#39;reject&#39;, callback)</code>。</li>
-</ul>
-<p>具体实现如下</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; EventEmitter &#125; = <span class="built_in">require</span>(<span class="string">'events'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">usrPromise</span> <span class="keyword">extends</span> <span class="title">EventEmitter</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 构造时候执行</span></span><br><span class="line">    <span class="keyword">constructor</span>(executor) &#123;</span><br><span class="line">        <span class="keyword">super</span>()</span><br><span class="line">        <span class="comment">// 发布</span></span><br><span class="line">        <span class="keyword">const</span> resolve = <span class="function">(<span class="params">value</span>) =&gt;</span> <span class="keyword">this</span>.emit(<span class="string">'resolve'</span>, value)</span><br><span class="line">        <span class="keyword">const</span> reject = <span class="function">(<span class="params">reason</span>) =&gt;</span> <span class="keyword">this</span>.emit(<span class="string">'reject'</span>, reason)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (executor) &#123;</span><br><span class="line">            <span class="comment">// 模拟 event loop，注此处利用 Macrotask 来模拟 Microtask</span></span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> executor(resolve, reject))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    then(resolveHandler, rejectHandler) &#123;</span><br><span class="line">        <span class="keyword">const</span> nextPromise = <span class="keyword">new</span> usrPromise()</span><br><span class="line">        <span class="comment">// 订阅 resolve 事件</span></span><br><span class="line">        <span class="keyword">if</span> (resolveHandler) &#123;</span><br><span class="line">            <span class="keyword">const</span> resolve = <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> result = resolveHandler(data)</span><br><span class="line">                nextPromise.emit(<span class="string">'resolve'</span>, result)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.on(<span class="string">'resolve'</span>, resolve)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 订阅 reject 事件</span></span><br><span class="line">        <span class="keyword">if</span> (rejectHandler) &#123;</span><br><span class="line">            <span class="keyword">const</span> reject = <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> result = rejectHandler(data)</span><br><span class="line">                nextPromise.emit(<span class="string">'reject'</span>, result)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.on(<span class="string">'reject'</span>, reject)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.on(<span class="string">'reject'</span>, (data) =&gt; &#123;</span><br><span class="line">                promise.emit(<span class="string">'reject'</span>, data)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nextPromise</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(handler) &#123;</span><br><span class="line">        <span class="keyword">this</span>.on(<span class="string">'reject'</span>, handler)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>引用于 <a href="https://gist.github.com/dmvaldman/12a7e46be6c3097aae31" target="_blank" rel="noopener">https://gist.github.com/dmvaldman/12a7e46be6c3097aae31</a><br>为了更好地模拟 Promise 机制，修改了一点。</p>
-<p>如果需要进一步了解事件机制，见<a href="https://juejin.im/post/5c4041805188252420629086。" target="_blank" rel="noopener">https://juejin.im/post/5c4041805188252420629086。</a></p>
-</blockquote>
-<p>我们使用 <code>then</code> 方法来将预先需要定义的事件侦听器存放起来，同时在 <code>executor</code> 中设定这些事件该在什么时候实行。</p>
-<p>可以看出从事件发布\订阅模式到 Promise，带来了语义上的巨大变革，但是还是需要使用 new Promise 来描述整个状态的转换，那么有没有更好地实现方式呢？</p>
-<h3 id="async、await-lt-Promise、Generator"><a href="#async、await-lt-Promise、Generator" class="headerlink" title="async、await &lt;= Promise、Generator"></a>async、await &lt;= Promise、Generator</h3><p>async、await 标准是 ES 2017 引入，提供一种更加简洁的异步解决方案。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params">greeting</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, then</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            resolve(greeting)</span><br><span class="line">        &#125;, <span class="number">1500</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">;(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> v1 = <span class="keyword">await</span> say(<span class="string">'Hello'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(v1)</span><br><span class="line">    <span class="keyword">let</span> v2 = <span class="keyword">await</span> say(<span class="string">'World'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(v2)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-
-<p>await 可以理解为暂停当前 async function 的执行，等待 Promise 处理完成。。若 Promise 正常处理（fulfilled），其回调的resolve函数参数作为 await 表达式的值。</p>
-<p>async、await 的出现，减少了多个 <code>then</code> 的链式调用形式的代码。下面我们结合 Promise 与 Generator 来实现 async、await</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">async</span>(<span class="params">makeGenerator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> generator = makeGenerator.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">&#123; value, done &#125;</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (done === <span class="literal">true</span>) <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(value)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(value).then(</span><br><span class="line">                (res) =&gt; &#123;</span><br><span class="line">                    <span class="keyword">return</span> handle(generator.next(res))</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> handle(generator.throw(err))</span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> handle(generator.next())</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(ex)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span>(<span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> v1 = <span class="keyword">yield</span> say(<span class="string">'hello'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>, v1)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> v2 = <span class="keyword">yield</span> say(<span class="string">'world'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>, v2)</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-
-<p>本质上就是利用递归完成 <code>function* () { ... }</code> 的自动执行。相比与 Generator 函数，这种形式无需手动执行，并且具有更好的语义。</p>
-<p><strong>引用：</strong></p>
-<ul>
-<li>深入浅出 NodeJS</li>
-<li>ES6 入门</li>
-<li>PromiseJS</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2826,7 +2905,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2876,7 +2955,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
