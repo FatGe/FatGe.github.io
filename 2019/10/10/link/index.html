@@ -95,14 +95,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+  <meta name="description" content="最近在用 lerna 重构一个项目，其中一个 package 是使用 rollup 作为脚手架的，需要使用 ts 对其进行重写，但是发现在使用 rollup 时，ts 只能被编译为 js，而之后却不能用 babel 编译为 es3.  首先明确 rollup 需要处理的任务流为 123typescript = (rollup-plugin-typescript2)     	   =&amp;gt; E">
+<meta name="keywords" content="typescript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用 gulp 解决 rollup 中 typescript 与 babel 冲突">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/link/index.html">
 <meta property="og:site_name" content="Yzz的神秘商店💪">
+<meta property="og:description" content="最近在用 lerna 重构一个项目，其中一个 package 是使用 rollup 作为脚手架的，需要使用 ts 对其进行重写，但是发现在使用 rollup 时，ts 只能被编译为 js，而之后却不能用 babel 编译为 es3.  首先明确 rollup 需要处理的任务流为 123typescript = (rollup-plugin-typescript2)     	   =&amp;gt; E">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-16T02:57:35.359Z">
+<meta property="og:updated_time" content="2019-10-19T10:43:00.226Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="利用 gulp 解决 rollup 中 typescript 与 babel 冲突">
+<meta name="twitter:description" content="最近在用 lerna 重构一个项目，其中一个 package 是使用 rollup 作为脚手架的，需要使用 ts 对其进行重写，但是发现在使用 rollup 时，ts 只能被编译为 js，而之后却不能用 babel 编译为 es3.  首先明确 rollup 需要处理的任务流为 123typescript = (rollup-plugin-typescript2)     	   =&amp;gt; E">
 
 
 
@@ -110,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/tags/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/10/link/">
 
 
 
@@ -120,7 +124,7 @@
   };
 </script>
 
-  <title>tags | Yzz的神秘商店💪</title>
+  <title>利用 gulp 解决 rollup 中 typescript 与 babel 冲突 | Yzz的神秘商店💪</title>
   
 
 
@@ -232,7 +236,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -330,97 +334,260 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/link/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">tags
-
-</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
+          <h1 class="post-title" itemprop="name headline">利用 gulp 解决 rollup 中 typescript 与 babel 冲突
+
               
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-                
-                  
-                
-              
-              目前共计 4 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              
-                <a href="/tags/javascript/" style="font-size: 30px; color: #111">javascript</a> <a href="/tags/react/" style="font-size: 21px; color: #6f6f6f">react</a> <a href="/tags/typescript/" style="font-size: 12px; color: #ccc">typescript</a> <a href="/tags/vue/" style="font-size: 12px; color: #ccc">vue</a>
-              
-            </div>
-          </div>
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 18:33:23" itemprop="dateCreated datePublished" datetime="2019-10-10T18:33:23+08:00">2019-10-10</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-19 18:43:00" itemprop="dateModified" datetime="2019-10-19T18:43:00+08:00">2019-10-19</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <blockquote>
+<p>最近在用 lerna 重构一个项目，其中一个 package 是使用 rollup 作为脚手架的，需要使用 ts 对其进行重写，但是发现在使用 rollup 时，ts 只能被编译为 js，而之后却不能用 babel 编译为 es3.</p>
+</blockquote>
+<p>首先明确 rollup 需要处理的任务流为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typescript = (rollup-plugin-typescript2) </span><br><span class="line">    	   =&gt; ES5 = (babel) </span><br><span class="line">           =&gt; ES3</span><br></pre></td></tr></table></figure>
+
+<p>但是第一步、二步冲突，故采用 gulp 将上述任务拆分。</p>
+<h2 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h2><p>首先创建 rollup-repo 项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir rollup-repo &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br></pre></td></tr></table></figure>
+
+<p>安装 gulp 两个工具在项目内</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化项目</span></span><br><span class="line">npm init</span><br><span class="line"><span class="comment"># 安装 gulp</span></span><br><span class="line">npm install --save-dev gulp</span><br></pre></td></tr></table></figure>
+
+<p>然后创建 gulpfile.js 脚本用于后续运行，并在文件中输入以下代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log (<span class="string">'build'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>同时在 package.json 中添加 <code>script</code>，并在终端中输入 <code>npm run build</code>，看是否打印出 <code>build</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "build": "gulp build",</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入-rollup"><a href="#引入-rollup" class="headerlink" title="引入 rollup"></a>引入 rollup</h2><p>在项目中安装 rollup 用于打包 typescript</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 rollup</span></span><br><span class="line">npm install --save-dev rollup</span><br></pre></td></tr></table></figure>
+
+<p>首先解决之前的第一个问题 typescript 转 ES2015</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rollup-plugin-tslint 用于检测 typescript</span></span><br><span class="line">npm install --save-dev rollup-plugin-tslint</span><br><span class="line"><span class="comment"># rollup-plugin-typescript2 用于将 ts 编译为 js</span></span><br><span class="line">npm install --save-dev rollup-plugin-typescript2</span><br></pre></td></tr></table></figure>
+
+<p>将 rollup 处理 typescript 作为 gulp 的一个 task，使用 ./temp/index.js 作为中转的文件。更新 gulpfile.js 的内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在终端中运行命令 <code>npm run build</code>，此时发现在 tempFile 中，typescript 已经被编译为 ES2015 的代码，之后需要我们将它转换为 ES3</p>
+<p>引入 gulp-babel 来处理这个任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure>
+
+<p>之后就是 gulp 很明显的 pipe 方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span> (<span class="string">'gulp-babel'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>利用 <code>babel</code> 将 temp.js 中 ES2015 的代码编译为 ES3</p>
+<p>至此，任务已经初步完成了，后续需要我们将 temp.js 删除并 uglyfly 代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clean file</span></span><br><span class="line">npm install --save-dev gulp-clean</span><br><span class="line"><span class="comment"># uglyfly file</span></span><br><span class="line">npm install --save-dev gulp-uglyfly</span><br></pre></td></tr></table></figure>
+
+<p>引入两个插件来完成细化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (clean ())</span><br><span class="line">    .pipe (uglyfly ())</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这个脚手架的配置中主要是想利用 rollup 强大的 tree-shaking 功能，故将其结合在其中，可能会有更好的方法。</p>
+
       
     </div>
-    
-
-
 
     
+
+    
+      
+    
+
     
     
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/typescript/" rel="tag"># typescript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/23/react-sortable-hoc/" rel="next" title="React-sortable-hoc 结合 hook 实现 Draggin 和 Droppin">
+                <i class="fa fa-chevron-left"></i> React-sortable-hoc 结合 hook 实现 Draggin 和 Droppin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/19/ts-in-rollup/" rel="prev" title="ts-in-rollup">
+                ts-in-rollup <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -453,8 +620,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -557,6 +733,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目搭建"><span class="nav-number">1.</span> <span class="nav-text">项目搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入-rollup"><span class="nav-number">2.</span> <span class="nav-text">引入 rollup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

@@ -350,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/link/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/ts-in-rollup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yzz">
@@ -370,7 +370,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/10/19/link/" class="post-title-link" itemprop="url">Link 标签几则进阶的知识</a>
+                <a href="/2019/10/19/ts-in-rollup/" class="post-title-link" itemprop="url">ts-in-rollup</a>
               
             
           </h1>
@@ -395,13 +395,168 @@
                 
               
 
-              <time title="创建时间：2019-10-19 18:33:23 / 修改时间：18:36:13" itemprop="dateCreated datePublished" datetime="2019-10-19T18:33:23+08:00">2019-10-19</time>
+              <time title="创建时间：2019-10-19 18:42:01" itemprop="dateCreated datePublished" datetime="2019-10-19T18:42:01+08:00">2019-10-19</time>
+            </span>
+          
+
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/link/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yzz">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yzz的神秘商店💪">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/10/link/" class="post-title-link" itemprop="url">利用 gulp 解决 rollup 中 typescript 与 babel 冲突</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 18:33:23" itemprop="dateCreated datePublished" datetime="2019-10-10T18:33:23+08:00">2019-10-10</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-19 18:43:00" itemprop="dateModified" datetime="2019-10-19T18:43:00+08:00">2019-10-19</time>
+              </span>
             
           
 
@@ -414,7 +569,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
 
                 
                 
@@ -456,53 +611,49 @@
       
         
           
-            <h2 id="lt-link-gt-只能在-lt-head-gt-中插入么？"><a href="#lt-link-gt-只能在-lt-head-gt-中插入么？" class="headerlink" title="&lt;link /&gt; 只能在 &lt;head /&gt; 中插入么？"></a><code>&lt;link /&gt;</code> 只能在 <code>&lt;head /&gt;</code> 中插入么？</h2><p>不是。在某些情况下 <code>&lt;link /&gt;</code> 也能插入到 <code>&lt;body /&gt;</code> 中，具体情况取决于当前 <code>&lt;link /&gt;</code> 是否有一个 <strong>body-ok</strong> 的链接类型。例如，在日常开发中，会使用 </p>
-<ul>
-<li><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;main.css&quot; /&gt;</code> 来链接<strong>样式表</strong>；</li>
-<li><code>&lt;link rel=&quot;icon&quot; href=&quot;favicon.ico&quot; /&gt;</code> 来链接<strong>网站的图标</strong>。</li>
-</ul>
-<p>但是只有 <strong>stylesheet</strong> 类型才是 <strong>body-ok</strong> 可以插入到 <code>&lt;body /&gt;</code> 中，其他类型见 <a href="https://html.spec.whatwg.org/multipage/links.html#body-ok" target="_blank" rel="noopener">HTML Standard</a>。</p>
-<p><del>我们可以这么使用</del>（极其不推荐）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// index.html</span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./styles/head.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- demo 1 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./styles/body.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 此时 body.css 会覆盖 .head.css --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>但是这不是一种好的可遵循的实践方式；更合理的方式是，将你的 <code>&lt;link&gt;</code> 元素从你的 body 内容中分离出来，将其放在 <code>&lt;head&gt;</code> 中。</p>
-<h2 id="lt-link-gt-标签的-media-属性"><a href="#lt-link-gt-标签的-media-属性" class="headerlink" title="&lt;link /&gt; 标签的 media 属性"></a><code>&lt;link /&gt;</code> 标签的 <code>media</code> 属性</h2><p>在日常开发中，有时候会碰到需要媒体查询的情况，例如</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// screen width 从 600px 到 900px 时，样式生效  </span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">900px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.title</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// screen width 从 0 到 600px 时，样式生效  </span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">600px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.title</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>业务不复杂的情况，可以选择这样实现，但是当样式很多时，会造成当前样式表复杂且不不清晰。我们可以借助 <code>&lt;link rel=&quot;stylesheet&quot; media=&quot;(max-width: 600px)&quot; href=&quot;example.css&quot; /&gt;</code> 来分离样式，这个属性规定了外部资源适用的媒体类型。</p>
-<h2 id="lt-link-gt-的-disabled-属性"><a href="#lt-link-gt-的-disabled-属性" class="headerlink" title="&lt;link /&gt; 的 disabled 属性"></a><code>&lt;link /&gt;</code> 的 <code>disabled</code> 属性</h2><p>常用于启用或禁用样式表，例如</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'link[href="red.css"]'</span>).disabled = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-
-<p>可以使得 <code>red.css</code> 失效，一般可以配合 <code>&lt;link /&gt;</code> 的 <code>title</code>、<code>rel</code> 来实现网站换肤功能，具体见</p>
-<blockquote>
-<p>利用 disabled 实现网站换肤 <a href="https://www.zhangxinxu.com/wordpress/2019/02/link-rel-alternate-website-skin/" target="_blank" rel="noopener">link rel=alternate网站换肤功能最佳实现</a>.</p>
+            <blockquote>
+<p>最近在用 lerna 重构一个项目，其中一个 package 是使用 rollup 作为脚手架的，需要使用 ts 对其进行重写，但是发现在使用 rollup 时，ts 只能被编译为 js，而之后却不能用 babel 编译为 es3.</p>
 </blockquote>
-<h2 id="利用-lt-link-gt-标签完成游览器预加载机制"><a href="#利用-lt-link-gt-标签完成游览器预加载机制" class="headerlink" title="利用 &lt;link /&gt; 标签完成游览器预加载机制"></a>利用 <code>&lt;link /&gt;</code> 标签完成游览器预加载机制</h2><p>在优化页面的首屏的时候，首先要做的就是<strong>限制首次请求的资源大小以及资源数</strong>，但是这样会使得每次跳转至一个未缓存资源的页面时，都需要重新加载。如果在页面加载时候可以满足</p>
-<ul>
-<li>首屏需要的资源作为即刻资源，希望在页面加载的早期就开始获取，在浏览器的主渲染机制介入前就进行预加载；</li>
-<li>当首屏加载完成之后，在加载其他页面的资源，这样既不占有首屏的时间，也可以优化其他页面。</li>
-</ul>
-<p><code>&lt;link /&gt;</code> 标签的 <code>rel</code> 的属性值 <code>preload</code> 就可以实现这一功能，来指明哪些资源是在页面加载完成后即刻需要的。为了完成基本的配置，你还需要通过 <code>href</code>和<code>as</code> 属性指定需要被预加载资源的资源路径及其类型，具体实例</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"preload"</span> <span class="attr">href</span>=<span class="string">"style.css"</span> <span class="attr">as</span>=<span class="string">"style"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"preload"</span> <span class="attr">href</span>=<span class="string">"main.js"</span> <span class="attr">as</span>=<span class="string">"script"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- hello world 代码片段 * 2048 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>首先明确 rollup 需要处理的任务流为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typescript = (rollup-plugin-typescript2) </span><br><span class="line">    	   =&gt; ES5 = (babel) </span><br><span class="line">           =&gt; ES3</span><br></pre></td></tr></table></figure>
 
-<p>在使用预加载时候，waterfall 如下</p>
-<p><img src="https://user-gold-cdn.xitu.io/2019/9/30/16d817a804296738?w=591&h=170&f=png&s=22354" alt></p>
-<p>在不使用预加载的时候</p>
-<p><img src="https://user-gold-cdn.xitu.io/2019/9/30/16d817ae8930811d?w=655&h=177&f=png&s=23083" alt></p>
-<p>从图中很明显可以看出 main.js 的加载实际又很明显的分别，也就是预加载的好处。也就实现了，我们对首屏资    源的预加载，而其他资源的加载时机，我们可以通过脚本化来控制，通过新建 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLLinkElement" target="_blank" rel="noopener"><code>HTMLLinkElement</code></a> 元素来实现。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当首页完成的时候</span></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 完成对其他资源的预加载</span></span><br><span class="line">	<span class="keyword">var</span> preloadLink = <span class="built_in">document</span>.createElement(<span class="string">"link"</span>);</span><br><span class="line">  preloadLink.href = <span class="string">"myscript.js"</span>;</span><br><span class="line">  preloadLink.rel = <span class="string">"preload"</span>;</span><br><span class="line">  preloadLink.as = <span class="string">"script"</span>;</span><br><span class="line">  <span class="built_in">document</span>.head.appendChild(preloadLink);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是第一步、二步冲突，故采用 gulp 将上述任务拆分。</p>
+<h2 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h2><p>首先创建 rollup-repo 项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir rollup-repo &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="lt-link-gt-的-onload-事件"><a href="#lt-link-gt-的-onload-事件" class="headerlink" title="&lt;link /&gt; 的 onload 事件"></a><code>&lt;link /&gt;</code> 的 onload 事件</h2><p>与 <code>window.onload</code> 事件一样，它赋予了我们监听样式表加载完成的（但是还未应用到内容），也可以通过 error 来监听是否在加载期间发生了异常。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">sheetLoaded</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="comment">// Do something interesting; the sheet has been loaded</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">sheetError</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  alert(<span class="string">"An error occurred loading the stylesheet!"</span>);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"mystylesheet.css"</span> <span class="attr">onload</span>=<span class="string">"sheetLoaded()"</span> <span class="attr">onerror</span>=<span class="string">"sheetError()"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>安装 gulp 两个工具在项目内</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化项目</span></span><br><span class="line">npm init</span><br><span class="line"><span class="comment"># 安装 gulp</span></span><br><span class="line">npm install --save-dev gulp</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p>参考来源</p>
-<ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content</a></li>
-<li><a href="https://www.zhangxinxu.com/wordpress/2019/02/link-rel-alternate-website-skin/" target="_blank" rel="noopener">https://www.zhangxinxu.com/wordpress/2019/02/link-rel-alternate-website-skin/</a></li>
-</ul>
-</li>
-</ul>
+<p>然后创建 gulpfile.js 脚本用于后续运行，并在文件中输入以下代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gulp = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line">gulp.task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log (<span class="string">'build'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>同时在 package.json 中添加 <code>script</code>，并在终端中输入 <code>npm run build</code>，看是否打印出 <code>build</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "build": "gulp build",</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="引入-rollup"><a href="#引入-rollup" class="headerlink" title="引入 rollup"></a>引入 rollup</h2><p>在项目中安装 rollup 用于打包 typescript</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 rollup</span></span><br><span class="line">npm install --save-dev rollup</span><br></pre></td></tr></table></figure>
+
+<p>首先解决之前的第一个问题 typescript 转 ES2015</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rollup-plugin-tslint 用于检测 typescript</span></span><br><span class="line">npm install --save-dev rollup-plugin-tslint</span><br><span class="line"><span class="comment"># rollup-plugin-typescript2 用于将 ts 编译为 js</span></span><br><span class="line">npm install --save-dev rollup-plugin-typescript2</span><br></pre></td></tr></table></figure>
+
+<p>将 rollup 处理 typescript 作为 gulp 的一个 task，使用 ./temp/index.js 作为中转的文件。更新 gulpfile.js 的内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在终端中运行命令 <code>npm run build</code>，此时发现在 tempFile 中，typescript 已经被编译为 ES2015 的代码，之后需要我们将它转换为 ES3</p>
+<p>引入 gulp-babel 来处理这个任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp-babel</span><br></pre></td></tr></table></figure>
+
+<p>之后就是 gulp 很明显的 pipe 方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;task, src, dest&#125; = <span class="built_in">require</span> (<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;rollup&#125; = <span class="built_in">require</span> (<span class="string">'rollup'</span>);</span><br><span class="line"><span class="keyword">const</span> tslint = <span class="built_in">require</span> (<span class="string">'rollup-plugin-tslint'</span>);</span><br><span class="line"><span class="keyword">const</span> typescript = <span class="built_in">require</span> (<span class="string">'rollup-plugin-typescript2'</span>);</span><br><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span> (<span class="string">'gulp-babel'</span>);</span><br><span class="line"><span class="keyword">const</span> tempFile = <span class="string">'./temp.js'</span>;</span><br><span class="line"></span><br><span class="line">task (<span class="string">'build'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bundleJS = <span class="keyword">await</span> rollup (&#123;</span><br><span class="line">    input: <span class="string">'index.ts'</span>,</span><br><span class="line">    plugins: [tslint (), typescript ()],</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> bundleJS.write (&#123;</span><br><span class="line">    file: tempFile,</span><br><span class="line">    format: <span class="string">'cjs'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>利用 <code>babel</code> 将 temp.js 中 ES2015 的代码编译为 ES3</p>
+<p>至此，任务已经初步完成了，后续需要我们将 temp.js 删除并 uglyfly 代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clean file</span></span><br><span class="line">npm install --save-dev gulp-clean</span><br><span class="line"><span class="comment"># uglyfly file</span></span><br><span class="line">npm install --save-dev gulp-uglyfly</span><br></pre></td></tr></table></figure>
+
+<p>引入两个插件来完成细化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">src (tempFile)</span><br><span class="line">    .pipe (</span><br><span class="line">      babel (&#123;</span><br><span class="line">        presets: [<span class="string">'@babel/env'</span>],</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe (clean ())</span><br><span class="line">    .pipe (uglyfly ())</span><br><span class="line">    .pipe (dest (<span class="string">'dist'</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这个脚手架的配置中主要是想利用 rollup 强大的 tree-shaking 功能，故将其结合在其中，可能会有更好的方法。</p>
 
           
         
@@ -698,10 +849,10 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br></pre></td></tr></table></figure>
 
 <p>在src目录中创建一个 Gif.js 文件并写入以下代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Gif = <span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">alt</span>=<span class="string">"gif"</span> /&gt;</span>)</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">Gif.propTypes = &#123;</span></span><br><span class="line"><span class="xml">  gif: PropTypes.string.isRequired,</span></span><br><span class="line"><span class="xml">&#125;;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">export default Gif;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Gif = <span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> (&lt;img src=&#123;gif&#125; alt="gif" /&gt;)</span><br><span class="line"></span><br><span class="line">Gif.propTypes = &#123;</span><br><span class="line">  gif: PropTypes.string.isRequired,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default Gif;</span><br></pre></td></tr></table></figure>
 
 <p>编写代码时尽力遵循最佳实践，因此我们还导入 PropTypes 进行类型检查。之后将Gif 组件并将其添加到 App 中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./App.css'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Gif <span class="keyword">from</span> <span class="string">'./Gif'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [gifs, setGifs] = useState([<span class="string">'https://media.giphy.com/media/3ohhwoWSCtJzznXbuo/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/l46CbZ7KWEhN1oci4/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/3ohzgD1wRxpvpkDCSI/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/xT1XGYy9NPhWRPp4pq/giphy.gif'</span>,]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;Drag those GIFs around&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;h2&gt;Set 1&lt;/</span>h2&gt;</span><br><span class="line">        &#123;gifs.map(<span class="function">(<span class="params">gif,  i</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Gif</span> <span class="attr">key</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">gif</span>=<span class="string">&#123;gif&#125;</span> /&gt;</span>)&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./App.css'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Gif <span class="keyword">from</span> <span class="string">'./Gif'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [gifs, setGifs] = useState([<span class="string">'https://media.giphy.com/media/3ohhwoWSCtJzznXbuo/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/l46CbZ7KWEhN1oci4/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/3ohzgD1wRxpvpkDCSI/giphy.gif'</span>,<span class="string">'https://media.giphy.com/media/xT1XGYy9NPhWRPp4pq/giphy.gif'</span>,]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;Drag those GIFs around&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;h2&gt;Set 1&lt;/</span>h2&gt;</span><br><span class="line">        &#123;gifs.map(<span class="function">(<span class="params">gif,  i</span>) =&gt;</span> &lt;Gif key=&#123;gif&#125; gif=&#123;gif&#125; /&gt;)&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
 
 <p>运行 <code>npm run start</code>，访问 <a href="http://localhost:3000/，可以看到如下结果" target="_blank" rel="noopener">http://localhost:3000/，可以看到如下结果</a></p>
 <p><img src="http://fatge.xyz/static/img/drag-example-2.webp" alt></p>
@@ -717,7 +868,7 @@
 <li><code>sortableElement</code>  是每个可渲染元素的容器。</li>
 </ul>
 <p>import 之后我们要做的是</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SortableGifsContainer = sortableContainer(<span class="function">(<span class="params">&#123; children &#125;</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"gifs"</span>&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SortableGif = sortableElement(<span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Gif</span> <span class="attr">key</span>=<span class="string">&#123;gif&#125;</span> <span class="attr">gif</span>=<span class="string">&#123;gif&#125;</span> /&gt;</span>);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SortableGifsContainer = sortableContainer(<span class="function">(<span class="params">&#123; children &#125;</span>) =&gt;</span> &lt;div className="gifs"&gt;&#123;children&#125;&lt;/div&gt;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SortableGif = sortableElement(<span class="function">(<span class="params">&#123; gif &#125;</span>) =&gt;</span> &lt;Gif key=&#123;gif&#125; gif=&#123;gif&#125; /&gt;);</span><br></pre></td></tr></table></figure>
 
 <p> <code>SortableGif</code> 为每个子元素创建了一个容器，也就是为单个 Gif 组件创建。它们将使用在 <code>SortableGifsContainer</code> 中，以 <code>children</code> 属性传递进去</p>
 <blockquote>
@@ -1842,7 +1993,7 @@
 
 <p><strong>注意：</strong> componentDidCatch 仅会捕获渲染/生命周期方法中的错误。 如果在单击处理程序中引发错误，则不会捕获它。</p>
 <p>通常只在特殊的地方使用错误边界组件的 componentDidCatch。 这些组件包装子树的唯一目的是捕获和记录错误。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">errorMessage</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">  <span class="keyword">static</span> getDerivedStateFromError(error) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">errorMessage</span>: error.message &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidCatch(error, info) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error, info);</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.errorMessage) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Oops! &#123;this.state.errorMessage&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123; <span class="attr">errorMessage</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">  <span class="keyword">static</span> getDerivedStateFromError(error) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">errorMessage</span>: error.message &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidCatch(error, info) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error, info);</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.errorMessage) &#123;</span><br><span class="line">      <span class="keyword">return</span> &lt;h1&gt;Oops! &#123;this.state.errorMessage&#125;&lt;/h1&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>总结：</strong> 捕获、打印出错误信息。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上是React v16的生命周期钩子所适用的场景和具体使用方法。</p>
@@ -2629,297 +2780,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/react-in-ts/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yzz">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yzz的神秘商店💪">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/17/react-in-ts/" class="post-title-link" itemprop="url">React & Redux in TypeScript - 静态类型指南</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-17 09:39:02 / 修改时间：09:47:07" itemprop="dateCreated datePublished" datetime="2019-07-17T09:39:02+08:00">2019-07-17</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>翻译自  <a href="https://github.com/piotrwitek/react-redux-typescript-guide#store-configuration" target="_blank" rel="noopener">react-redux-typescript-guide</a>，作者：Piotrek Witek</p>
-<p>翻译自 <a href="https://qiita.com/IgnorantCoder/items/ac681c97eb8318a87bb3#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank" rel="noopener">TypeScriptでRedux Thunkを使う</a>，作责：Yusuke Mori</p>
-<p>参考文章 <a href="https://juejin.im/post/5b07caf16fb9a07aa83f2977" target="_blank" rel="noopener">TypeScript 2.8下的终极React组件模式</a></p>
-</blockquote>
-<p><em>概述：最近在学习 react&amp;TypeScript，发现有许多的组件模式和方法需要去梳理和总结。所以选择一些文章用于沉淀和思考，记录下一些知识点，和大家探讨。</em></p>
-<p><span style="color: #666;">publish：2019-03-21</span></p>
-<p><strong>目录：</strong></p>
-<ul>
-<li>简介，环境配置（<a href="https://www.html.cn/create-react-app/docs/adding-typescript/" target="_blank" rel="noopener">create-react-app</a>）</li>
-<li>React - 关键类型（react-redux-typescript-guide ）</li>
-<li>React - 组件模式（react-redux-typescript-guide &amp; TypeScript 2.8下的终极React组件模式）</li>
-<li>Redux - 使用以及 Redux Thunk 使用（TypeScriptでRedux Thunkを使う）</li>
-<li>总结</li>
-</ul>
-<h4 id="React-关键类型"><a href="#React-关键类型" class="headerlink" title="React - 关键类型"></a>React - 关键类型</h4><ul>
-<li><p>展示性组件（<code>FunctionComponent</code>）</p>
-<p><code>React.FunctionComponent&lt;P&gt;</code> or <code>React.FC&lt;P&gt;</code>。</p>
-<p><code>const MyComponent: React.FC&lt;Props&gt; = ...</code></p>
-</li>
-<li><p>有状态组件（<code>ClassComponent</code>）</p>
-<p><code>React.Component&lt;P, S&gt;</code></p>
-<p><code>class MyComponent extends React.Component&lt;Props, State&gt; { ...</code></p>
-</li>
-<li><p>组件Props</p>
-<p><code>React.ComponentProps&lt;typeof Component&gt;</code></p>
-<p>获取组件（适用于ClassComponent、FunctionComponent）的Props的类型</p>
-<p><code>type MyComponentProps = React.ComponentProps&lt;typeof MyComponent&gt;;</code></p>
-</li>
-<li><p>React.FC | React.Component的联合类型</p>
-<p><code>React.ComponentType&lt;P&gt;</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withState = <span class="xml"><span class="tag">&lt;<span class="name">P</span> <span class="attr">extends</span> <span class="attr">WrappedComponentProps</span>&gt;</span>(</span></span><br><span class="line">    WrappedComponent: React.ComponentType&lt;P&gt;,</span><br><span class="line">) =&gt; &#123; ...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>React 要素</p>
-<p><code>React.ReactElement&lt;P&gt;</code> or <code>JSX.Element</code></p>
-<p>表示React元素概念的类型 - DOM组件（例如<div>）或用户定义的复合组件（<mycomponent>）</mycomponent></div></p>
-<p><code>const elementOnly: React.ReactElement = &lt;div /&gt; || &lt;MyComponent /&gt;;</code></p>
-</li>
-<li><p>React Node</p>
-<p><code>React.ReactNode</code></p>
-<p>表示任何类型的React节点（基本上是ReactElement（包括Fragments和Portals）+ 原始JS类型 的合集）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> elementOrPrimitive: React.ReactNode = <span class="string">'string'</span> || <span class="number">0</span> || <span class="literal">false</span> || <span class="literal">null</span> || <span class="literal">undefined</span> || <span class="xml"><span class="tag">&lt;<span class="name">div</span> /&gt;</span> || <span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">const Component = (&#123; children: React.ReactNode &#125;) =&gt; ...</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>React CSS属性</p>
-<p><code>React.CSSProperties</code></p>
-<p>代表着Style Object在 JSX 文件中（通常用于 css-in-js）</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> styles: React.CSSProperties = &#123; flexDirection: <span class="string">'row'</span>, ...</span><br><span class="line"><span class="keyword">const</span> element = &lt;div style=&#123;styles&#125; ...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通用的 React Event Handler</p>
-<p><code>React.ReactEventHandler&lt;HTMLElement&gt;</code></p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleChange: React.ReactEventHandler&lt;HTMLInputElement&gt; = <span class="function">(<span class="params">ev</span>) =&gt;</span> &#123; ... &#125; </span><br><span class="line"></span><br><span class="line">&lt;input onChange=&#123;handleChange&#125; ... /&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>特殊的 React Event Handler</p>
-<p><code>React.MouseEvent&lt;E&gt;</code> | <code>React.KeyboardEvent&lt;E&gt;</code> | <code>React.TouchEvent&lt;E&gt;</code></p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleChange = <span class="function">(<span class="params">ev: React.MouseEvent&lt;HTMLDivElement&gt;</span>) =&gt;</span> &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">&lt;div onMouseMove=&#123;handleChange&#125; ... /&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="React-组件模式"><a href="#React-组件模式" class="headerlink" title="React 组件模式"></a>React 组件模式</h4><ul>
-<li><p>Function Components - FC 纯函数组件（无状态）</p>
-<p>顾名思义，纯函数组件本身不具备 <code>State</code>，所以没有状态，一切通过 <code>Props</code></p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC, ReactElement, MouseEvent  &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Props = &#123;</span><br><span class="line">    label: <span class="built_in">string</span>,</span><br><span class="line">    children: ReactElement,</span><br><span class="line">    onClick?: <span class="function">(<span class="params">e: MouseEvent&lt;HTMLButtonElement&gt;</span>) =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FunctionComponent: FC&lt;Props&gt; = <span class="function">(<span class="params">&#123; label, children, onClick &#125;: Props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;span&gt;</span><br><span class="line">                &#123;label&#125;：</span><br><span class="line">            &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">            &lt;button type="button" onClick=&#123;onClick&#125;&gt;</span></span><br><span class="line"><span class="regexp">                &#123;children&#125;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>button&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default FunctionComponent</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>扩展属性（spread attributes）</strong></p>
-<p>利用 <code>...</code> 对剩余属性进行处理</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC, ReactElement, MouseEvent, CSSProperties &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Props = &#123;</span><br><span class="line">    label: <span class="built_in">string</span>,</span><br><span class="line">    children: ReactElement,</span><br><span class="line">    className?: <span class="built_in">string</span>,</span><br><span class="line">    style?: CSSProperties,</span><br><span class="line">    onClick?: <span class="function">(<span class="params">e: MouseEvent&lt;HTMLButtonElement&gt;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FunctionComponent: FC&lt;Props&gt; = <span class="function">(<span class="params">&#123; label, children, onClick, ...resetProps &#125;: Props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div &#123;...resetProps&#125;&gt;</span><br><span class="line">            &lt;span&gt;&#123;label&#125;：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">            &lt;button type="button" onClick=&#123;onClick&#125;&gt;</span></span><br><span class="line"><span class="regexp">                &#123;children&#125;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>button&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default FunctionComponent</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>默认属性</strong></p>
-<p>如果，需要默认属性，可以通过默认参数值来处理</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; FC, ReactElement, MouseEvent  &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Props = &#123;</span><br><span class="line">    label?: <span class="built_in">string</span>,</span><br><span class="line">    children: ReactElement,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FunctionComponent: FC&lt;Props&gt; = <span class="function">(<span class="params">&#123; label = 'Hello', children &#125;: Props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;span&gt;</span><br><span class="line">                &#123;label&#125;：</span><br><span class="line">            &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">            &lt;button type="button"&gt;</span></span><br><span class="line"><span class="regexp">                &#123;children&#125;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>button&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default FunctionComponent</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Class Components</p>
-<p>相对于FC，多了 <code>state</code>，采用如下形式来定义Class Component</p>
-<blockquote>
-<p>这一部分的写法，与<a href="https://juejin.im/post/5b07caf16fb9a07aa83f2977#heading-2" target="_blank" rel="noopener">TypeScript 2.8下的终极React组件模式</a>相同，觉得结构很清晰，复用。</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Props = &#123;</span><br><span class="line">    label: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> initialState  = &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> State = Readonly&lt;<span class="keyword">typeof</span> initialState&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> ClassCounter <span class="keyword">extends</span> Component&lt;Props, State&gt; &#123;</span><br><span class="line">    readonly state: State = initialState</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> handleIncrement = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.setState(Increment)</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; handleIncrement &#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">const</span> &#123; label &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123; count &#125; = <span class="keyword">this</span>.state;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;span&gt;</span><br><span class="line">                    &#123;label&#125;: &#123;count&#125;</span><br><span class="line">                &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">                &lt;button type="button" onClick=&#123;handleIncrement&#125;&gt;</span></span><br><span class="line"><span class="regexp">                    &#123;`Increment`&#125;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>button&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export const Increment = (preState: State) =&gt; (&#123; count: preState.count + 1 &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default ClassCounter</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>默认属性</strong></p>
-<p>处理 Class Component 的默认属性，主要有两种方法：</p>
-<ul>
-<li>一是定义高阶组件，例如<a href="https://juejin.im/post/5b07caf16fb9a07aa83f2977#heading-2" target="_blank" rel="noopener">TypeScript 2.8下的终极React组件模式</a>中，利用 <code>withDefaultProps</code> 来定义默认属性，涉及组件的属性的类型转换；</li>
-<li>二是利用 <code>static props</code> 以及 <code>componentWillReceiveProps</code>，处理默认属性。</li>
-</ul>
-<p>具体业务中，视情况而定，第一中可以查看相关文章，这里介绍第二种</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Props = &#123;</span><br><span class="line">    label: <span class="built_in">string</span>,</span><br><span class="line">    initialCount: <span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> State = &#123;</span><br><span class="line">    count: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> ClassCounter <span class="keyword">extends</span> Component&lt;Props, State&gt; &#123;</span><br><span class="line">    <span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">        initialCount: <span class="number">1</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 依据 defaultProps 对 state 进行处理</span></span><br><span class="line">    readonly state: State = &#123;</span><br><span class="line">        count: <span class="keyword">this</span>.props.initialCount,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> handleIncrement = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.setState(Increment)</span><br><span class="line">	  <span class="comment">// 响应 defaultProps 的变化</span></span><br><span class="line">    componentWillReceiveProps(&#123; initialCount &#125;: Props) &#123;</span><br><span class="line">        <span class="keyword">if</span> (initialCount != <span class="literal">null</span> &amp;&amp; initialCount !== <span class="keyword">this</span>.props.initialCount) &#123;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123; count: initialCount &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; handleIncrement &#125; = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">const</span> &#123; label &#125; = <span class="keyword">this</span>.props;</span><br><span class="line">        <span class="keyword">const</span> &#123; count &#125; = <span class="keyword">this</span>.state;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;span&gt;</span><br><span class="line">                    &#123;label&#125;: &#123;count&#125;</span><br><span class="line">                &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">                &lt;button type="button" onClick=&#123;handleIncrement&#125;&gt;</span></span><br><span class="line"><span class="regexp">                    &#123;`Increment`&#125;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>button&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export const Increment = (preState: State) =&gt; (&#123; count: preState.count + 1 &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default ClassCounter</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通用组件 Generic Components</p>
-<ul>
-<li>复用共有的逻辑创建组件</li>
-<li>常用于通用列表</li>
-</ul>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, ReactElement &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> GenericListProps&lt;T&gt; &#123;</span><br><span class="line">    items: T[],</span><br><span class="line">    itemRenderer: <span class="function">(<span class="params">item: T, i: <span class="built_in">number</span></span>) =&gt;</span> ReactElement,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> GenericList&lt;T&gt; <span class="keyword">extends</span> Component&lt;GenericListProps&lt;T&gt;, &#123;&#125;&gt; &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; items, itemRenderer &#125; = <span class="keyword">this</span>.props</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &lt;div&gt;&#123;items.map(itemRenderer)&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default GenericList</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Render Callback &amp; Render Props</p>
-<ul>
-<li><p>Render Callback，也被称为函数子组件，就是将 children 替换为 () =&gt; children；</p>
-</li>
-<li><p>Render Props，就是将 () =&gt; component 作为 Props 传递下去。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, ReactElement &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Props = &#123;</span><br><span class="line">    PropRender?: <span class="function"><span class="params">()</span> =&gt;</span> ReactElement,</span><br><span class="line">    children?: <span class="function"><span class="params">()</span> =&gt;</span> ReactElement</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> PropRender <span class="keyword">extends</span> Component&lt;Props, &#123;&#125;&gt; &#123;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; props: &#123; children, PropRender &#125; &#125;: &#123; props: Props &#125; = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &#123; PropRender &amp;&amp; PropRender() &#125;</span><br><span class="line">                &#123; children &amp;&amp; children() &#125;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default PropRender</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 应用</span></span><br><span class="line"><span class="regexp">&lt;PropsRender</span></span><br><span class="line"><span class="regexp">                    PropRender=&#123;() =&gt; (&lt;p&gt;Prop Render&lt;/</span>p&gt;)&#125;</span><br><span class="line">                &gt;</span><br><span class="line">                    &#123; <span class="function"><span class="params">()</span> =&gt;</span> (&lt;p&gt;Child Render&lt;<span class="regexp">/p&gt;) &#125;</span></span><br><span class="line"><span class="regexp">               &lt;/</span>PropsRender&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>HOC（Higher-Order Components）</p>
-<p>简单理解为，接受React组件作为输入，输出一个新的React组件的组件的工厂函数。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> InjectedProps &#123;</span><br><span class="line">    label: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> withState = &lt;BaseProps <span class="keyword">extends</span> InjectedProps&gt;(</span><br><span class="line">    BaseComponent: React.ComponentType&lt;BaseProps&gt;</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">    <span class="keyword">type</span> HocProps = BaseProps &amp; InjectedProps &amp; &#123;</span><br><span class="line">        initialCount?: <span class="built_in">number</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">type</span> HocState = &#123;</span><br><span class="line">        readonly count: <span class="built_in">number</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">class</span> Hoc <span class="keyword">extends</span> React.Component&lt;HocProps, HocState&gt; &#123;</span><br><span class="line">        <span class="comment">// 方便 debugging in React-Dev-Tools</span></span><br><span class="line">        <span class="keyword">static</span> displayName = <span class="string">`withState(<span class="subst">$&#123;BaseComponent.name&#125;</span>)`</span>;</span><br><span class="line">        <span class="comment">// 关联原始的 wrapped component</span></span><br><span class="line">        <span class="keyword">static</span> readonly WrappedComponent = BaseComponent;</span><br><span class="line"></span><br><span class="line">        readonly state: HocState = &#123;</span><br><span class="line">            count: <span class="built_in">Number</span>(<span class="keyword">this</span>.props.initialCount) || <span class="number">0</span>,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        handleIncrement = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.setState(&#123; count: <span class="keyword">this</span>.state.count + <span class="number">1</span> &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        render() &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123; ...restProps &#125; = <span class="keyword">this</span>.props <span class="keyword">as</span> <span class="built_in">any</span></span><br><span class="line">            <span class="keyword">const</span> &#123; count &#125; = <span class="keyword">this</span>.state</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">                &lt;&gt;</span><br><span class="line">                    &#123;count&#125;</span><br><span class="line">                    &lt;BaseComponent</span><br><span class="line">                        onClick=&#123;<span class="keyword">this</span>.handleIncrement&#125;</span><br><span class="line">                        &#123;...restProps&#125;</span><br><span class="line">                    /&gt;</span><br><span class="line">                &lt;<span class="regexp">/&gt;</span></span><br><span class="line"><span class="regexp">            )</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="Redux-使用以及-Redux-Thunk-使用"><a href="#Redux-使用以及-Redux-Thunk-使用" class="headerlink" title="Redux - 使用以及 Redux Thunk 使用"></a>Redux - 使用以及 Redux Thunk 使用</h4><p>以如下形式来介绍Redux，主要是in-ts的使用：</p>
-<ul>
-<li><p>(prestate, action) =&gt; state；</p>
-</li>
-<li><p>使用Redux Thunk 来出来异步操作。</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store.js</span></span><br><span class="line"></span><br><span class="line">type DataType = &#123;</span><br><span class="line">    counter: number</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> DataState: DataType = &#123;</span><br><span class="line">    counter: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type RootState = &#123;</span><br><span class="line">    Data: DataType</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> RootState</span><br></pre></td></tr></table></figure>
-
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// action.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; Action, AnyAction &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ThunkAction, ThunkDispatch &#125; <span class="keyword">from</span> <span class="string">'redux-thunk'</span></span><br><span class="line"><span class="keyword">import</span> RootState <span class="keyword">from</span> <span class="string">'../store/index'</span></span><br><span class="line"></span><br><span class="line">type IncrementPayload = &#123;</span><br><span class="line">    value: number</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface IncrementAction extends Action &#123;</span><br><span class="line">    type: <span class="string">'INCREMENT'</span>,</span><br><span class="line">    payload: IncrementPayload</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Increment = (&#123; value &#125;: IncrementPayload): <span class="function"><span class="params">IncrementAction</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> payload = &#123; value &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        type: <span class="string">'INCREMENT'</span>,</span><br><span class="line">        payload</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> type DecrementPayload = &#123;</span><br><span class="line">    value: number;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> interface DecrementAction extends Action &#123;</span><br><span class="line">    type: <span class="string">'DECREMENT'</span>;</span><br><span class="line">    payload: DecrementPayload;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> type RootAction = IncrementAction &amp; DecrementAction;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> asyncIncrement = (</span><br><span class="line">    payload: IncrementPayload</span><br><span class="line">): ThunkAction&lt;<span class="built_in">Promise</span>&lt;<span class="keyword">void</span>&gt;, RootState, <span class="keyword">void</span>, AnyAction&gt; =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">async</span> (dispatch: ThunkDispatch&lt;RootState, <span class="keyword">void</span>, AnyAction&gt;): <span class="built_in">Promise</span>&lt;<span class="keyword">void</span>&gt; =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>&lt;<span class="keyword">void</span>&gt;<span class="function">(<span class="params">(resolve</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Login in progress'</span>)</span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                dispatch(Increment(payload))</span><br><span class="line">                setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                    resolve()</span><br><span class="line">                &#125;, <span class="number">1000</span>)</span><br><span class="line">            &#125;, <span class="number">3000</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// reducer.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; DataState, DataType &#125; <span class="keyword">from</span> <span class="string">'../store/Data'</span></span><br><span class="line"><span class="keyword">import</span> &#123; RootAction &#125; <span class="keyword">from</span> <span class="string">'../actions/'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">state: DataType = DataState, &#123; type, payload &#125;: RootAction</span>): <span class="title">DataType</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'INCREMENT'</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                ...state,</span><br><span class="line">                counter: state.counter + payload.value,</span><br><span class="line">            &#125;;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-  <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Hearder.js</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, ReactNode &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> RootState <span class="keyword">from</span> <span class="string">'../store/index'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Dispatch, AnyAction &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ThunkDispatch &#125; <span class="keyword">from</span> <span class="string">'redux-thunk'</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Increment, asyncIncrement &#125; <span class="keyword">from</span> <span class="string">'../actions/'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> initialState = &#123;</span><br><span class="line">    name: <span class="string">'string'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> StateToPropsType = Readonly&lt;&#123;</span><br><span class="line">    counter: <span class="built_in">number</span></span><br><span class="line">&#125;&gt;</span><br><span class="line"><span class="keyword">type</span> DispatchToPropsType = Readonly&lt;&#123;</span><br><span class="line">    handleAdd: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">    handleDec: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> StateType = Readonly&lt;<span class="keyword">typeof</span> initialState&gt;</span><br><span class="line"><span class="keyword">type</span> PropsType = &#123;</span><br><span class="line">    children?: ReactNode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> ComponentProps = StateToPropsType &amp; DispatchToPropsType &amp; PropsType</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Header <span class="keyword">extends</span> Component&lt;ComponentProps, StateType&gt; &#123;</span><br><span class="line">    readonly state: StateType = initialState;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; props: &#123; handleAdd, handleDec, counter &#125;, state: &#123; name &#125; &#125; = <span class="keyword">this</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                计数：&#123;counter&#125;</span><br><span class="line">                &lt;button onClick=&#123;handleAdd&#125;&gt;+&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;button onClick=&#123;handleDec&#125;&gt;-&lt;/</span>button&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    private handleClick = () =&gt; this.setState(sayHello);</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const sayHello = (prevState: StateType) =&gt; (&#123;</span></span><br><span class="line"><span class="regexp">    name: prevState.name + 'Hello world',</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const mapStateToProps = (state: RootState, props: PropsType): StateToPropsType =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">        counter: state.Data.counter</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const mapDispatchToProps = (dispatch: ThunkDispatch&lt;RootState, void, AnyAction&gt;): DispatchToPropsType =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    return &#123;</span></span><br><span class="line"><span class="regexp">        handleAdd: () =&gt; &#123;</span></span><br><span class="line"><span class="regexp">            dispatch(Increment(&#123; value: 2 &#125;))</span></span><br><span class="line"><span class="regexp">        &#125;,</span></span><br><span class="line"><span class="regexp">        handleDec: async () =&gt; &#123;</span></span><br><span class="line"><span class="regexp">            dispatch(asyncIncrement(&#123; value: 10 &#125;))</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default connect&lt;StateToPropsType, DispatchToPropsType, PropsType, RootState&gt;(mapStateToProps, mapDispatchToProps)(Header)</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2959,7 +2826,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2982,7 +2849,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -3007,9 +2876,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
